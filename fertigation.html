@@ -38,10 +38,13 @@ body{background:#fff;color:var(--fg);font-family:system-ui,-apple-system,"Segoe 
 #liquid{transition:transform 3s}
 #scene.off .flow,#scene.off .spray{opacity:0}
 #scene.off .spin{animation-play-state:paused}
+#scene.off .vib{animation:none}
 @media (prefers-reduced-motion:no-preference){
 .flow{stroke-dasharray:10 8;animation:fl .7s linear infinite}
 .spray{stroke-dasharray:4 6;animation:spr .6s linear infinite}
-.spin{transform-box:fill-box;transform-origin:center;animation:rot 1s linear infinite}}
+.spin{transform-box:fill-box;transform-origin:center;animation:rot .5s linear infinite}
+.vib{animation:vib .12s linear infinite alternate}}
+@keyframes vib{from{transform:translate(-.7px,0)}to{transform:translate(.7px,.5px)}}
 @keyframes fl{to{stroke-dashoffset:-18}}
 @keyframes spr{to{stroke-dashoffset:-10}}
 @keyframes rot{to{transform:rotate(360deg)}}
@@ -90,11 +93,13 @@ button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;s
 <rect id="vh" x="176" y="192" width="20" height="6" rx="2" fill="#d9534f"/>
 <text class="ts" x="186" y="256" text-anchor="middle">Valve</text>
 
+<g class="vib">
 <rect x="270" y="48" width="76" height="44" rx="8" fill="#1f9e94"/>
 <rect x="322" y="56" width="24" height="28" rx="4" fill="#17776f"/>
 <rect x="296" y="40" width="16" height="9" rx="2" fill="#e8772e"/>
-<circle cx="298" cy="70" r="15" fill="#17776f"/>
-<g class="spin"><path d="M298 58V82M286 70H310" stroke="#d8f3ef" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+<circle cx="298" cy="70" r="17" fill="#17776f"/>
+<g class="spin" fill="#d8f3ef"><path d="M298 70C291 62 291 53 298 52C305 53 305 62 298 70Z"/><path d="M298 70C291 62 291 53 298 52C305 53 305 62 298 70Z" transform="rotate(90 298 70)"/><path d="M298 70C291 62 291 53 298 52C305 53 305 62 298 70Z" transform="rotate(180 298 70)"/><path d="M298 70C291 62 291 53 298 52C305 53 305 62 298 70Z" transform="rotate(270 298 70)"/><circle cx="298" cy="70" r="3.5" fill="#17776f"/></g>
+</g>
 <text class="th" x="308" y="30" text-anchor="middle">Water pump</text>
 <line class="arr" x1="396" y1="70" x2="352" y2="70" marker-end="url(#arrow)"/>
 <text class="ts" x="402" y="74">Water in</text>
@@ -148,8 +153,8 @@ function icon(n){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</
 var HOLD=8000;
 var S=[
 {name:'Clean water irrigation',dur:'2 h 15 min',valve:false,col:'#3aa0f0',inj:0,level:.75,note:'Valve closed. Only pump water runs through the line, wetting the root zone and charging the system.'},
-{name:'Fertigation injection',dur:'30 min',valve:true,col:'#8cc63f',inj:1,level:.6,note:'Valve open. Fertilizer from the tank enters the line and travels to every emitter with the irrigation water.'},
-{name:'Fresh water flush',dur:'15 min',valve:false,col:'#3aa0f0',inj:0,level:.6,note:'Valve closed. Clean water pushes leftover fertilizer out of the pipe and emitters so nothing sits in the line.'}
+{name:'Fertigation injection',dur:'30 min',valve:true,col:'#8cc63f',inj:1,level:.75,end:.4,note:'Valve open. Fertilizer drains from the tank into the line and travels to every emitter with the irrigation water.'},
+{name:'Fresh water flush',dur:'15 min',valve:false,col:'#3aa0f0',inj:0,keep:1,note:'Valve closed. Clean water pushes leftover fertilizer out of the pipe and emitters so nothing sits in the line.'}
 ];
 var i=0,t=0,playing=false,on=false;
 var $=function(id){return document.getElementById(id)};
@@ -161,13 +166,24 @@ function paint(){
 function playLabel(){
  $('play').innerHTML=playing?icon('pause')+' Pause':icon('play')+' Play';
 }
-function apply(){
+function setLevel(v,d,e){var el=$('liquid');el.style.transition='transform '+d+'s '+(e||'ease');el.style.transform='scaleY('+v+')'}
+function curLevel(){var m=getComputedStyle($('liquid')).transform.match(/matrix\(([^)]+)\)/);return m?parseFloat(m[1].split(',')[3]):1}
+function level(reset){
+ var s=S[i];
+ if(s.keep){setLevel(curLevel(),0);return}
+ if(s.end==null){setLevel(s.level,3);return}
+ if(!on){setLevel(reset?s.level:curLevel(),0);return}
+ if(reset){setLevel(s.level,0);void $('liquid').getBoundingClientRect()}
+ var d=Math.max(.3,(curLevel()-s.end)/(s.level-s.end)*HOLD/1000);
+ setLevel(s.end,d,'linear');
+}
+function apply(reset){
  var s=S[i];
  $('scene').style.setProperty('--spc',s.col);
  $('flowB').style.stroke=s.col;
  $('inj').setAttribute('opacity',s.inj);
  $('vh').setAttribute('fill',s.valve?'#3fa34d':'#d9534f');
- $('liquid').style.transform='scaleY('+s.level+')';
+ level(reset);
  $('ttl').textContent='Step '+(i+1)+' of 3: '+s.name+' ('+s.dur+')';
  $('note').textContent=on?s.note:'Sprinklers are off. Turn them on to see this step run.';
  segs.forEach(function(b,k){b.classList.toggle('on',k===i)});
@@ -180,7 +196,7 @@ function setOn(v){
  if(!v){playing=false;playLabel()}
  apply();
 }
-function go(n){i=(n+3)%3;t=0;apply()}
+function go(n){i=(n+3)%3;t=0;apply(true)}
 
 $('back').innerHTML=icon('left')+' Back';
 $('next').innerHTML='Next '+icon('right');
@@ -199,7 +215,7 @@ $('play').onclick=function(){
 setInterval(function(){
  if(!playing||!on)return;
  t+=100;
- if(t>=HOLD){i=(i+1)%3;t=0;apply()}else{paint()}
+ if(t>=HOLD){i=(i+1)%3;t=0;apply(true)}else{paint()}
 },100);
 
 setOn(false);
