@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tripartite Symbiosis</title>
+
+<meta property="og:title" content="Tripartite Symbiosis">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://professoracodd.github.io/Horticulture/tripartite-symbiosis.html">
+<meta property="og:image" content="https://professoracodd.github.io/Horticulture/tripartite-symbiosis-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="Tripartite Symbiosis">
+<meta name="twitter:image" content="https://professoracodd.github.io/Horticulture/tripartite-symbiosis-preview.png">
+<meta name="twitter:player" content="https://professoracodd.github.io/Horticulture/tripartite-symbiosis.html">
+<meta name="twitter:player:width" content="800">
+<meta name="twitter:player:height" content="600">
+
+<meta name="description" content="Step-through animation: a legume root system hosting rhizobia and arbuscular mycorrhizal fungi at the same time.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bar:#ffffff;--ink:#1d1d1d;--muted:#5b5b5b;--line:#d8d8d8;--accent:#2f6b1f;--accent-ink:#ffffff;--page:#eef1ea}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--page);font-family:Inter,'DejaVu Sans',system-ui,sans-serif;color:var(--ink)}
+.wrap{height:100%;display:flex;flex-direction:column}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px}
+.stage svg{width:min(100%, calc((100vh - 92px) * 4 / 3));width:min(100%, calc((100dvh - 92px) * 4 / 3));height:auto;aspect-ratio:4/3;display:block;background:#fff;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+svg text{font-family:Inter,'DejaVu Sans',sans-serif}
+.bar{flex:none;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 12px 12px;background:var(--page)}
+button{font:inherit;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);padding:9px 18px;cursor:pointer;min-height:44px}
+button svg{width:20px;height:20px;flex:none}
+button:hover{border-color:#a8a8a8}
+button:focus-visible{outline:3px solid #1f63c9;outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.primary:hover{background:#25561a;border-color:#25561a}
+button.icon{padding:9px 12px}
+.dots{display:flex;gap:8px;align-items:center;margin:0 4px}
+.dot{width:12px;height:12px;border-radius:50%;background:#c7cbc2;border:none;padding:0;min-height:0;cursor:pointer}
+.dot[aria-current="step"]{background:var(--accent);transform:scale(1.25)}
+.dot:focus-visible{outline:3px solid #1f63c9;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){button .lbl{display:none}button{padding:9px 12px}}
+</style></head>
+<body>
+<div class="wrap">
+<main class="stage">
+<svg id="s" role="img" aria-labelledby="svgTitle svgDesc" viewBox="0 0 1536 1152" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<title id="svgTitle">Tripartite symbiosis in a legume root system</title><desc id="svgDesc">A legume plant with roots in soil.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f7ee"/>
+  </linearGradient>
+  <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#7b5233"/><stop offset="0.5" stop-color="#6a4429"/><stop offset="1" stop-color="#55361f"/>
+  </linearGradient>
+  <radialGradient id="nodGrad" cx="0.38" cy="0.35" r="0.7">
+    <stop offset="0" stop-color="#f6c9b4"/><stop offset="0.6" stop-color="#df9c86"/><stop offset="1" stop-color="#b8705f"/>
+  </radialGradient>
+  <radialGradient id="sporeG" cx="0.35" cy="0.35" r="0.7">
+    <stop offset="0" stop-color="#ffe7a0"/><stop offset="0.7" stop-color="#e2b13c"/><stop offset="1" stop-color="#b8861c"/>
+  </radialGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.28"/>
+  </filter>
+  <filter id="lshadow" x="-20%" y="-20%" width="140%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.22"/>
+  </filter>
+  <clipPath id="clipL"><circle cx="0" cy="0" r="168"/></clipPath>
+  <clipPath id="clipR"><circle cx="0" cy="0" r="168"/></clipPath>
+</defs>
+<rect width="1536" height="1152" fill="url(#sky)"/>
+<g id="soilG"></g>
+<g id="rootsG"></g>
+<g id="hyphaeG"></g>
+<g id="nodG"></g>
+<g id="plantG"></g>
+<g id="flowG"></g>
+<g id="partG"></g>
+<g id="insetG"></g>
+<g id="labelG"></g>
+<g id="uiG"></g>
+</svg>
+</main>
+<nav class="bar" aria-label="Step controls">
+  <button id="restart" class="icon" aria-label="Start over"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+  <button id="back" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="lbl">Back</span></button>
+  <div class="dots" id="dots" role="group" aria-label="Jump to step"></div>
+  <button id="next" class="primary" aria-label="Next step"><span class="lbl">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="fs" class="icon" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<div id="live" class="sr" aria-live="polite"></div>
+</div>
+<script>
+(async function(){
+try{await Promise.race([Promise.all(['500 28px Inter','600 24px Inter','700 28px Inter','800 54px Inter'].map(f=>document.fonts.load(f))),new Promise(r=>setTimeout(r,2500))]);}catch(e){}
+
+const NS='http://www.w3.org/2000/svg';
+const W=1536,H=1152,G=500, SX=768;
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function $(id){return document.getElementById(id);}
+let seed=7;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const ss=x=>{x=clamp(x,0,1);return x*x*(3-2*x);};
+const eo=x=>{x=clamp(x,0,1);return 1-Math.pow(1-x,3);};
+const eback=x=>{x=clamp(x,0,1);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const seg=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+
+// ---------- bezier helpers ----------
+function bz(p,t){const u=1-t;return [u*u*u*p[0][0]+3*u*u*t*p[1][0]+3*u*t*t*p[2][0]+t*t*t*p[3][0],
+                                       u*u*u*p[0][1]+3*u*u*t*p[1][1]+3*u*t*t*p[2][1]+t*t*t*p[3][1]];}
+function bzd(p,t){const u=1-t;return [3*u*u*(p[1][0]-p[0][0])+6*u*t*(p[2][0]-p[1][0])+3*t*t*(p[3][0]-p[2][0]),
+                                        3*u*u*(p[1][1]-p[0][1])+6*u*t*(p[2][1]-p[1][1])+3*t*t*(p[3][1]-p[2][1])];}
+function nrm(p,t){const d=bzd(p,t);const L=Math.hypot(d[0],d[1])||1;return [-d[1]/L,d[0]/L];}
+function taper(p,w0,w1,n=60){const L=[],R=[];for(let i=0;i<=n;i++){const t=i/n,q=bz(p,t),m=nrm(p,t),w=(w0+(w1-w0)*Math.pow(t,0.8))/2;
+  L.push([q[0]+m[0]*w,q[1]+m[1]*w]);R.push([q[0]-m[0]*w,q[1]-m[1]*w]);}
+  const e=bz(p,1);let d='M'+L.map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join('L');
+  d+=`A${(w1/2).toFixed(1)},${(w1/2).toFixed(1)} 0 0 1 `+R[R.length-1][0].toFixed(1)+','+R[R.length-1][1].toFixed(1);
+  d+='L'+R.reverse().map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join('L')+'Z';return d;}
+function offsetPath(p,off,t0,t1,n=50){const pts=[];for(let i=0;i<=n;i++){const t=t0+(t1-t0)*i/n,q=bz(p,t),m=nrm(p,t);pts.push([q[0]+m[0]*off,q[1]+m[1]*off]);}return pts;}
+
+// ---------- soil ----------
+(function(){
+  const g=$('soilG');
+  el('rect',{x:0,y:G,width:W,height:H-G,fill:'url(#soil)'},g);
+  // aggregates
+  for(let i=0;i<900;i++){const x=rnd()*W,y=G+12+rnd()*(H-G-12),r=3+rnd()*13;
+    const dark=rnd()<0.5;const c=dark?`rgba(50,30,15,${0.10+rnd()*0.15})`:`rgba(170,125,85,${0.08+rnd()*0.14})`;
+    el('ellipse',{cx:x,cy:y,rx:r,ry:r*(0.55+rnd()*0.4),transform:`rotate(${rnd()*180} ${x} ${y})`,fill:c},g);}
+  for(let i=0;i<70;i++){const x=rnd()*W,y=G+30+rnd()*(H-G-40),r=4+rnd()*8;
+    el('ellipse',{cx:x,cy:y,rx:r,ry:r*0.7,fill:`rgb(${150+rnd()*40|0},${140+rnd()*30|0},${125+rnd()*25|0})`,opacity:0.75,transform:`rotate(${rnd()*180} ${x} ${y})`},g);}
+  // grass strip
+  el('rect',{x:0,y:G-6,width:W,height:14,fill:'#5d9a37'},g);
+  let d='';for(let x=0;x<W;x+=7){const h=10+rnd()*20,lean=(rnd()-0.5)*10;d+=`M${x},${G+2}Q${x+lean/2},${G-h/2} ${x+lean},${G-h}Q${x+3+lean/2},${G-h/2} ${x+6},${G+2}Z`;}
+  el('path',{d,fill:'#6fb043'},g);
+  el('rect',{x:0,y:G+4,width:W,height:4,fill:'rgba(0,0,0,0.18)'},g);
+})();
+
+// ---------- roots ----------
+const ROOT={fill:'#f0e1c2',stroke:'#b99a6a'};
+const tap=[[SX,G],[SX+4,640],[SX-8,860],[SX+6,1080]];
+const L1=[[SX-2,560],[SX-60,580],[SX-170,620],[SX-250,720]];
+const L2=[[SX-4,720],[SX-50,740],[SX-120,800],[SX-180,900]];
+const R1=[[SX+3,590],[SX+70,605],[SX+170,650],[SX+235,760]];
+const R2=[[SX-1,780],[SX+50,800],[SX+120,860],[SX+170,965]];
+const minor=[
+ [[SX-1,640],[SX-30,660],[SX-60,690],[SX-80,740]],
+ [[SX+2,680],[SX+40,700],[SX+70,720],[SX+95,770]],
+ [[SX,900],[SX-40,920],[SX-80,960],[SX-100,1020]],
+ [[SX+3,950],[SX+40,975],[SX+70,1010],[SX+80,1060]],
+ [[SX-170,625],[SX-190,650],[SX-205,690],[SX-200,730]],
+ [[SX+170,650],[SX+200,640],[SX+235,650],[SX+260,670]],
+];
+(function(){const g=$('rootsG');
+  const draw=(p,w0,w1)=>el('path',{d:taper(p,w0,w1),fill:ROOT.fill,stroke:ROOT.stroke,'stroke-width':2},g);
+  minor.forEach(p=>draw(p,5,1.6));
+  draw(L2,10,2.4);draw(R2,10,2.4);draw(L1,13,3);draw(R1,13,3);draw(tap,24,4);
+})();
+
+// ---------- plant ----------
+(function(){const g=$('plantG');
+  const stemP=[[SX,G+6],[SX-4,400],[SX+6,300],[SX,180]];
+  el('path',{d:taper(stemP,15,7),fill:'#4e8a2c',stroke:'#3c6e20','stroke-width':1.5},g);
+  const leaf=(x,y,ang,len)=>{const gg=el('g',{transform:`translate(${x},${y}) rotate(${ang})`},g);
+    el('path',{d:`M0,0 L${len},0`,stroke:'#4e8a2c','stroke-width':4,'stroke-linecap':'round'},gg);
+    const lf=(a,l,w)=>{const g2=el('g',{transform:`translate(${len},0) rotate(${a})`},gg);
+      el('path',{d:`M0,0 C${l*0.25},${-w} ${l*0.8},${-w*0.9} ${l},0 C${l*0.8},${w*0.9} ${l*0.25},${w} 0,0Z`,fill:'#69ad46',stroke:'#4a8a2d','stroke-width':2},g2);
+      el('path',{d:`M2,0 L${l*0.92},0`,stroke:'#4a8a2d','stroke-width':1.6,opacity:0.8},g2);};
+    lf(-48,52,17);lf(48,52,17);lf(0,62,19);};
+  leaf(SX-3,445,-158,52);leaf(SX-1,395,-25,58);leaf(SX+1,340,-150,60);leaf(SX+4,285,-28,58);
+  leaf(SX+3,235,-145,48);leaf(SX+2,205,-35,44);
+  // flowers (papilionaceous)
+  const fl=(x,y,a,s)=>{const gg=el('g',{transform:`translate(${x},${y}) rotate(${a}) scale(${s})`},g);
+    el('path',{d:'M0,0 C-14,-26 14,-30 16,-8 C18,4 6,8 0,0Z',fill:'#b86bc4',stroke:'#8a4699','stroke-width':1.5},gg);
+    el('path',{d:'M2,-2 C10,-6 22,-2 22,6 C14,8 6,6 2,-2Z',fill:'#e3b4ea',stroke:'#8a4699','stroke-width':1.2},gg);
+    el('path',{d:'M0,0 L-10,8',stroke:'#4e8a2c','stroke-width':3,'stroke-linecap':'round'},gg);};
+  fl(SX+4,176,-20,1.3);fl(SX-14,190,-60,1.1);fl(SX+18,196,10,1.1);
+})();
+
+// ---------- nodules ----------
+const NODS=[];
+(function(){
+  const add=(p,t,side,r,delay)=>{const q=bz(p,t),m=nrm(p,t);const w=r*0.6;NODS.push({x:q[0]+m[0]*side*w,y:q[1]+m[1]*side*w,r,delay});};
+  add(L1,0.28,1,14,0);add(L1,0.42,-1,16,0.08);add(L1,0.56,1,15,0.16);add(L1,0.70,-1,17,0.22);add(L1,0.84,1,14,0.3);
+  add(L2,0.35,1,12,0.12);add(L2,0.55,-1,14,0.2);add(L2,0.75,1,13,0.28);
+  add(minor[0],0.5,1,10,0.18);add(minor[4],0.5,-1,10,0.32);add(minor[2],0.6,1,11,0.35);
+  add(tap,0.10,-1,11,0.05);
+  const g=$('nodG');
+  NODS.forEach(n=>{n.g=el('g',{transform:`translate(${n.x},${n.y}) scale(0)`},g);
+    el('ellipse',{cx:0,cy:0,rx:n.r,ry:n.r*0.88,fill:'url(#nodGrad)',stroke:'#8f5444','stroke-width':2},n.g);
+    el('ellipse',{cx:-n.r*0.3,cy:-n.r*0.32,rx:n.r*0.28,ry:n.r*0.18,fill:'#fff',opacity:0.45},n.g);});
+})();
+
+// ---------- hyphae ----------
+const HYPH=[];const SPORES=[];
+(function(){
+  const g=$('hyphaeG');
+  const inBounds=(x,y)=>x>SX+30&&x<1110&&y>G+25&&y<1120 && !(x<SX+60&&y>900);
+  function grow(x,y,ang,len,depth,t0,dur){
+    const pts=[[x,y]];let a=ang;const step=9;const n=Math.floor(len/step);
+    for(let i=0;i<n;i++){a+=(rnd()-0.5)*0.55;const nx=x+Math.cos(a)*step,ny=y+Math.sin(a)*step;if(!inBounds(nx,ny))break;x=nx;y=ny;pts.push([x,y]);}
+    if(pts.length<3)return;
+    const d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L');
+    const o=el('path',{d,fill:'none',stroke:'#3a2412','stroke-width':depth==0?6:5,'stroke-linecap':'round','stroke-linejoin':'round',opacity:0.35,pathLength:1,'stroke-dasharray':'0 2'},g);
+    const p=el('path',{d,fill:'none',stroke:'#f7efd9','stroke-width':depth==0?3.2:2.4,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'0 2'},g);
+    HYPH.push({o,p,t0,dur,pts});
+    // branches
+    if(depth<2){const nb=depth==0?3:2;for(let b=0;b<nb;b++){const k=Math.floor((0.25+rnd()*0.6)*(pts.length-1));const bp=pts[k];
+      grow(bp[0],bp[1],a+(rnd()<0.5?-1:1)*(0.5+rnd()*0.7),len*(0.45+rnd()*0.25),depth+1,t0+dur*k/(pts.length-1),dur*0.6);}}
+    if(depth>=1 && rnd()<0.22){const e=pts[pts.length-1];SPORES.push({x:e[0],y:e[1],r:7+rnd()*2.5,t:t0+dur});}
+  }
+  const starts=[[R1,0.35],[R1,0.5],[R1,0.65],[R1,0.8],[R1,0.95],[R2,0.35],[R2,0.55],[R2,0.75],[R2,0.95],[minor[1],0.8],[minor[5],0.9],[minor[3],0.7]];
+  starts.forEach(([p,t],i)=>{const q=bz(p,t),m=nrm(p,t);const side=(i%2?1:-1);let ang=Math.atan2(m[1]*side,m[0]*side);
+    if(Math.cos(ang)<-0.2)ang=Math.PI-ang; grow(q[0],q[1],ang,150+rnd()*90,0,rnd()*0.25,0.55);});
+  const sg=el('g',{},g);
+  SPORES.forEach(s=>{s.g=el('g',{transform:`translate(${s.x},${s.y}) scale(0)`},sg);
+    el('circle',{cx:0,cy:0,r:s.r,fill:'url(#sporeG)',stroke:'#8a6414','stroke-width':1.6},s.g);});
+})();
+
+// ---------- insets ----------
+const INL={cx:250,cy:830,r:168,tx:NODS[3].x,ty:NODS[3].y};
+const INR={cx:1300,cy:880,r:168};
+(function(){
+  const q=bz(R1,0.8);INR.tx=q[0];INR.ty=q[1];
+  const g=$('insetG');
+  // left: nodule interior
+  INL.line=el('line',{x1:INL.tx,y1:INL.ty,x2:INL.cx,y2:INL.cy,stroke:'#fff','stroke-width':3,'stroke-dasharray':'8 6'},g);
+  INL.g=el('g',{transform:`translate(${INL.cx},${INL.cy}) scale(0)`},g);
+  el('circle',{cx:0,cy:0,r:INL.r+6,fill:'#fff',filter:'url(#shadow)'},INL.g);
+  const cl=el('g',{'clip-path':'url(#clipL)'},INL.g);
+  el('rect',{x:-200,y:-200,width:400,height:400,fill:'#f4dccd'},cl);
+  // cells: jittered hex grid
+  const cs=46;for(let row=-5;row<=5;row++)for(let col=-5;col<=5;col++){
+    const x=col*cs+(row%2?cs/2:0)+(rnd()-0.5)*6,y=row*cs*0.87+(rnd()-0.5)*6;const d=Math.hypot(x,y);
+    const infected=d<120;const r=cs*0.5;let pts=[];for(let k=0;k<6;k++){const a=Math.PI/6+k*Math.PI/3;pts.push([x+Math.cos(a)*r*(0.95+rnd()*0.08),y+Math.sin(a)*r*0.95]);}
+    el('polygon',{points:pts.map(p=>p.join(',')).join(' '),fill:infected?'#e7a3a7':'#f6e3d6',stroke:'#b77c74','stroke-width':2.2},cl);
+    if(infected){for(let k=0;k<16;k++){const bx=x+(rnd()-0.5)*cs*0.62,by=y+(rnd()-0.5)*cs*0.55,a=rnd()*180;
+      el('rect',{x:bx-6,y:by-2.6,width:12,height:5.2,rx:2.6,fill:'#6d3a86',transform:`rotate(${a} ${bx} ${by})`},cl);}}
+  }
+  el('circle',{cx:0,cy:0,r:INL.r,fill:'none',stroke:'#8f5444','stroke-width':4},INL.g);
+  // right: arbuscule in cortex
+  INR.line=el('line',{x1:INR.tx,y1:INR.ty,x2:INR.cx,y2:INR.cy,stroke:'#fff','stroke-width':3,'stroke-dasharray':'8 6'},g);
+  INR.g=el('g',{transform:`translate(${INR.cx},${INR.cy}) scale(0)`},g);
+  el('circle',{cx:0,cy:0,r:INR.r+6,fill:'#fff',filter:'url(#shadow)'},INR.g);
+  const cr=el('g',{'clip-path':'url(#clipR)'},INR.g);
+  el('rect',{x:-200,y:-200,width:400,height:400,fill:'#7b5233'},cr);
+  for(let i=0;i<60;i++){const x=-180+rnd()*360,y=-180+rnd()*110,r=3+rnd()*8;el('ellipse',{cx:x,cy:y,rx:r,ry:r*0.7,fill:rnd()<0.5?'rgba(40,25,12,0.25)':'rgba(170,125,85,0.25)'},cr);}
+  // root: epidermis + cortex below y=-60
+  el('rect',{x:-200,y:-62,width:400,height:300,fill:'#e9d8b4'},cr);
+  const cw=104,ch=80;let target=null;
+  for(let row=0;row<4;row++)for(let col=-3;col<=3;col++){
+    const x=col*cw+(row%2?cw/2:0)-cw/2,y=row==0?-58:(-24+(row-1)*ch);const hh=row==0?28:ch-6;
+    const isT=(row==1&&col==0);
+    el('rect',{x:x+3,y:y+3,width:cw-6,height:hh,rx:row==0?6:16,fill:isT?'#fff6dc':(row==0?'#f3e6c8':'#fbf3df'),stroke:'#b99a6a','stroke-width':2.4},cr);
+    if(isT)target={x:x+cw/2,y:y+3+hh/2,top:y+3};}
+  // hypha from spore through soil, between epidermal cells, into target cell
+  const tx=target.x,ty=target.y;
+  const hp=`M-78,-118 C-60,-95 -${cw/2+8},-80 -${cw/2},-60 L-${cw/2},-30 C-${cw/2},-18 -30,-18 ${tx-6},${target.top+14}`;
+  el('path',{d:hp,fill:'none',stroke:'#3a2412','stroke-width':10,'stroke-linecap':'round',opacity:0.28},cr);
+  el('path',{d:hp,fill:'none',stroke:'#f7efd9','stroke-width':6,'stroke-linecap':'round'},cr);
+  el('path',{d:'M-62,-96 C-20,-110 60,-118 170,-150',fill:'none',stroke:'#f7efd9','stroke-width':4,'stroke-linecap':'round'},cr);
+  el('path',{d:'M-90,-130 C-120,-150 -150,-140 -190,-170',fill:'none',stroke:'#f7efd9','stroke-width':4,'stroke-linecap':'round'},cr);
+  el('circle',{cx:-84,cy:-124,r:19,fill:'url(#sporeG)',stroke:'#8a6414','stroke-width':2},cr);
+  const ag=el('g',{},cr);
+  function br(x,y,a,l,w,d){const x2=x+Math.cos(a)*l,y2=y+Math.sin(a)*l;
+    el('line',{x1:x,y1:y,x2,y2,stroke:'#c58a1c','stroke-width':w,'stroke-linecap':'round'},ag);
+    if(d>0){br(x2,y2,a-0.45-rnd()*0.25,l*0.7,w*0.72,d-1);br(x2,y2,a+0.45+rnd()*0.25,l*0.7,w*0.72,d-1);}}
+  el('line',{x1:tx-6,y1:target.top+14,x2:tx-4,y2:ty-18,stroke:'#c58a1c','stroke-width':5,'stroke-linecap':'round'},ag);
+  br(tx-4,ty-18,Math.PI/2,14,5,4);br(tx-4,ty-18,Math.PI/2-1.1,13,4.4,4);br(tx-4,ty-18,Math.PI/2+1.1,13,4.4,4);br(tx-4,ty-18,-Math.PI/2+0.9,9,3.4,2);br(tx-4,ty-18,-Math.PI/2-0.9,9,3.4,2);
+  el('circle',{cx:0,cy:0,r:INR.r,fill:'none',stroke:'#8a6414','stroke-width':4},INR.g);
+})();
+
+// ---------- labels ----------
+function label(txt,x,y,opts={}){const g=el('g',{opacity:0},$('labelG'));
+  const fs=opts.fs||28;const t=el('text',{x:0,y:0,'font-size':fs,'font-weight':opts.fw||700,fill:opts.color||'#1f1f1f','text-anchor':'middle','dominant-baseline':'central'},g);
+  if(Array.isArray(txt)){txt.forEach(s=>{const sp=el('tspan',{},t);if(typeof s==='string'){sp.textContent=s;}else{sp.textContent=s[0];sp.setAttribute('baseline-shift',s[1]=='sub'?'-25%':'40%');sp.setAttribute('font-size',fs*0.68);}});}else t.textContent=txt;
+  const bb=t.getBBox();const px=14,py=8;
+  const r=el('rect',{x:bb.x-px,y:bb.y-py,width:bb.width+2*px,height:bb.height+2*py,rx:10,fill:opts.bg||'#fff',filter:'url(#lshadow)',stroke:opts.border||'none','stroke-width':3},g);
+  g.insertBefore(r,t);g.setAttribute('transform',`translate(${x},${y})`);return g;}
+const LB={};
+LB.nod=label('Root nodule',INL.cx,INL.cy+INL.r+40);
+LB.rhiz=label('Rhizobia inside cells',INL.cx,INL.cy-INL.r-34,{fs:24,fw:600,color:'#6d3a86'});
+LB.arb=label('Arbuscule in root cell',INR.cx,INR.cy+INR.r+40);
+LB.hyph=label('AM fungal hyphae',1070,560);
+LB.spore=label('Spore',INR.cx,INR.cy-INR.r-34,{fs:24,fw:600,color:'#8a6414'});
+LB.n2=label(['N',['2','sub'],'  →  NH',['4','sub'],['+','sup']],INL.cx,INL.cy+INL.r+96,{fs:28,color:'#fff',bg:'#1f63c9'});
+LB.p=label(['H',['2','sub'],'PO',['4','sub'],['−','sup'],'  +  H',['2','sub'],'O'],INR.cx,INR.cy+INR.r+96-1152+1152,{fs:28,color:'#fff',bg:'#7b3fb0'});
+// move P label to fit: below arbuscule label would hit bottom (1048+96=1144) -> place above inset next to spore
+LB.p.setAttribute('transform',`translate(${INR.cx},${INR.cy-INR.r-90})`);
+LB.sug=label('Sugars',SX-118,330,{fs:28,color:'#fff',bg:'#e0801a'});
+LB.nup=label('Nitrogen',SX+135,245,{fs:28,color:'#fff',bg:'#1f63c9'});
+LB.pup=label('P + water',SX+140,335,{fs:28,color:'#fff',bg:'#7b3fb0'});
+
+// ---------- flows ----------
+const FLOW={};
+function mkFlow(name,pts,color,width){const g=el('g',{},$('flowG'));
+  const d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L');
+  const o=el('path',{d,fill:'none',stroke:'#fff','stroke-width':width+5,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'0 2',opacity:0.9},g);
+  const p=el('path',{d,fill:'none',stroke:color,'stroke-width':width,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'0 2'},g);
+  const n=pts.length,e=pts[n-1],b=pts[n-3];const a=Math.atan2(e[1]-b[1],e[0]-b[0]);
+  const head=el('path',{d:'M8,0 L-14,-12 L-14,12Z',fill:color,stroke:'#fff','stroke-width':2.5,transform:`translate(${e[0]+Math.cos(a)*6},${e[1]+Math.sin(a)*6}) rotate(${a*180/Math.PI})`,opacity:0},g);
+  // cumulative length
+  const cum=[0];for(let i=1;i<n;i++)cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+  FLOW[name]={pts,cum,color,o,p,head,L:cum[n-1],g};}
+function at(f,u){const s=u*f.L;let i=1;while(i<f.cum.length-1&&f.cum[i]<s)i++;const k=(s-f.cum[i-1])/(f.cum[i]-f.cum[i-1]||1);
+  return [f.pts[i-1][0]+(f.pts[i][0]-f.pts[i-1][0])*k,f.pts[i-1][1]+(f.pts[i][1]-f.pts[i-1][1])*k];}
+function lineP(a,b,n=20){const r=[];for(let i=0;i<=n;i++)r.push([a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n]);return r;}
+// sugars: down left side of stem, then down taproot, split to nodules (L1) and fungi (R1)
+const stemDown=lineP([SX-24,250],[SX-24,G+30]);
+mkFlow('sugA',stemDown.concat(offsetPath(L1,-38,0.08,0.58)),'#e0801a',6);
+mkFlow('sugB',lineP([SX-24,250],[SX-24,G+30]).concat(lineP([SX-24,G+30],[SX+10,G+70])).concat(offsetPath(R1,-24,0.12,0.72)),'#e0801a',6);
+// N: from nodules back along L1 (below) to taproot, up right side of stem
+mkFlow('nUp',offsetPath(L1,38,0.62,0.10).concat(lineP([SX+22,G+40],[SX+22,250])),'#1f63c9',6);
+// P: from hyphal zone along R1 (below) then up stem further right
+mkFlow('pUp',[[1060,860],[1010,810]].concat(offsetPath(R1,26,0.86,0.15)).concat(lineP([SX+44,G+60],[SX+44,290])),'#7b3fb0',6);
+
+const PG=$('partG');
+function particles(f,u,shape){// u in [0,1] stream progress; dots each travel in 0.45 of total
+  const N=14,trav=0.45;for(let i=0;i<N;i++){const s=i/(N-1)*(1-trav);const k=(u-s)/trav;if(k<=0||k>=1)continue;
+    const p=at(f,ss(k)*0.98+0.01);
+    el('circle',{cx:p[0],cy:p[1],r:9,fill:f.color,stroke:'#fff','stroke-width':2.5},PG);}}
+
+// ---------- UI: title, captions, summary ----------
+const UI=$('uiG');
+el('text',{x:48,y:78,'font-size':54,'font-weight':800,fill:'#1d1d1d'},UI).textContent='Tripartite Symbiosis';
+el('text',{x:50,y:122,'font-size':28,'font-weight':500,fill:'#5b5b5b'},UI).textContent='One legume, two partners, one root system';
+const CAPS=['Legume roots in soil','Rhizobia live in root nodules','AM fungi grow hyphae into soil','Plant feeds both partners sugars','Rhizobia return fixed nitrogen','Fungi return phosphorus + water','Three-way exchange'];
+const capG=CAPS.map((c,i)=>{const g=el('g',{opacity:0,transform:'translate(48,160)'},UI);
+  const t=el('text',{x:58,y:36,'font-size':30,'font-weight':700,fill:'#1d1d1d'},g);t.textContent=c;
+  const bb=t.getBBox();
+  const r=el('rect',{x:0,y:0,width:bb.width+80,height:54,rx:12,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#lshadow)'},g);g.insertBefore(r,t);
+  el('circle',{cx:30,cy:27,r:17,fill:'#2f6b1f'},g);
+  const n=el('text',{x:30,y:28,'font-size':20,'font-weight':800,fill:'#fff','text-anchor':'middle','dominant-baseline':'central'},g);n.textContent=i==0?'•':String(i);
+  if(i==0||i==6){n.textContent='';}
+  return g;});
+// summary box
+const SUM=el('g',{opacity:0,transform:'translate(1010,150)'},UI);
+el('rect',{x:0,y:0,width:480,height:300,rx:16,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#shadow)'},SUM);
+const rows=[['#e0801a','Plant','sugars to both'],['#1f63c9','Rhizobia','nitrogen to plant'],['#7b3fb0','AM fungi','P + water to plant'],['#2f6b1f','Bonus','P powers N fixation']];
+rows.forEach((r,i)=>{const y=52+i*66;
+  el('circle',{cx:38,cy:y,r:15,fill:r[0]},SUM);
+  const t=el('text',{x:68,y:y,'font-size':28,'dominant-baseline':'central',fill:'#1d1d1d'},SUM);
+  const a=el('tspan',{'font-weight':800},t);a.textContent=r[1];const b=el('tspan',{'font-weight':500,fill:'#444'},t);b.textContent='  →  '+r[2];});
+
+// ---------- timeline ----------
+const T={s1:5, s2:15.9, s3:27.7, s4:38.7, s5:49.5, s6:60.3};
+function setDash(path,u){path.setAttribute('stroke-dasharray',`${u} 2`);path.setAttribute('visibility',u>0.002?'visible':'hidden');}
+function flowState(f,u){setDash(f.o,u);setDash(f.p,u);f.head.setAttribute('opacity',u>0.97?1:0);}
+function pop(g,x,y,u){g.setAttribute('transform',`translate(${x},${y}) scale(${Math.max(0,eback(u))})`);}
+function fade(g,u){g.setAttribute('opacity',ss(u));}
+window.render=function(t){
+  PG.innerHTML='';
+  // captions
+  const capT=[0,T.s1,T.s2,T.s3,T.s4,T.s5,T.s6,1e9];
+  capG.forEach((g,i)=>{let o=ss(seg(t,capT[i],capT[i]+0.5))*(1-ss(seg(t,capT[i+1],capT[i+1]+0.4)));if(i==0)o=1-ss(seg(t,T.s1,T.s1+0.4));g.setAttribute('opacity',o);});
+  // nodules
+  NODS.forEach(n=>pop(n.g,n.x,n.y,seg(t,T.s1+n.delay*3,T.s1+n.delay*3+0.8)));
+  // left inset
+  const uL=seg(t,T.s1+1.6,T.s1+2.4);pop(INL.g,INL.cx,INL.cy,uL);INL.line.setAttribute('opacity',ss(uL*1.5));
+  fade(LB.nod,seg(t,T.s1+2.2,T.s1+2.7));fade(LB.rhiz,seg(t,T.s1+2.4,T.s1+2.9));
+  // hyphae
+  const hu=1.45*seg(t,T.s2,T.s2+2.6);
+  HYPH.forEach(h=>{const u=ss(clamp((hu-h.t0)/h.dur,0,1));setDash(h.o,u);setDash(h.p,u);});
+  SPORES.forEach(s=>pop(s.g,s.x,s.y,seg(t,T.s2+s.t/1.45*2.6,T.s2+s.t/1.45*2.6+0.5)));
+  const uR=seg(t,T.s2+2.4,T.s2+3.2);pop(INR.g,INR.cx,INR.cy,uR);INR.line.setAttribute('opacity',ss(uR*1.5));
+  fade(LB.hyph,seg(t,T.s2+1.6,T.s2+2.1));fade(LB.arb,seg(t,T.s2+3.0,T.s2+3.5));fade(LB.spore,seg(t,T.s2+3.2,T.s2+3.7));
+  // sugars
+  const su=seg(t,T.s3,T.s3+3.0);flowState(FLOW.sugA,ss(su));flowState(FLOW.sugB,ss(su));
+  if(su>0&&su<1){particles(FLOW.sugA,su);particles(FLOW.sugB,su);}
+  fade(LB.sug,seg(t,T.s3+0.3,T.s3+0.8));
+  // N
+  const nu=seg(t,T.s4,T.s4+2.8);flowState(FLOW.nUp,ss(nu));if(nu>0&&nu<1)particles(FLOW.nUp,nu);
+  fade(LB.n2,seg(t,T.s4,T.s4+0.5));fade(LB.nup,seg(t,T.s4+2.3,T.s4+2.8));
+  // P
+  const pu=seg(t,T.s5,T.s5+2.8);flowState(FLOW.pUp,ss(pu));if(pu>0&&pu<1)particles(FLOW.pUp,pu);
+  fade(LB.p,seg(t,T.s5,T.s5+0.5));fade(LB.pup,seg(t,T.s5+2.3,T.s5+2.8));
+  // summary
+  fade(SUM,seg(t,T.s6,T.s6+0.8));
+  return true;
+};
+// ---------- step player ----------
+const STEPS=[
+ {s:0,e:0,desc:'A legume plant with its root system in the soil. No partners yet.'},
+ {s:T.s1,e:T.s1+2.9,desc:'Root nodules form on the roots. The close-up shows nodule cells packed with rhizobia bacteria.'},
+ {s:T.s2,e:T.s2+3.8,desc:'Arbuscular mycorrhizal fungi grow hyphae and spores out into the soil. The close-up shows a hypha entering a root cortex cell and branching into an arbuscule.'},
+ {s:T.s3,e:T.s3+3.0,desc:'Sugars from the leaves flow down the stem and out to both partners: the nodules and the fungi.'},
+ {s:T.s4,e:T.s4+2.8,desc:'Inside the nodule, rhizobia convert N2 gas to ammonium. Fixed nitrogen flows up to the plant.'},
+ {s:T.s5,e:T.s5+2.8,desc:'The fungal hyphae deliver phosphate (H2PO4 minus) and water to the root, which flow up to the plant.'},
+ {s:T.s6,e:T.s6+0.8,desc:'Summary: the plant gives sugars to both partners, rhizobia give nitrogen, AM fungi give phosphorus and water, and the extra phosphorus helps power nitrogen fixation.'}
+];
+let cur=0,raf=null;
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const dotsEl=$('dots');
+const dots=STEPS.map((st,i)=>{const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Step '+(i+1)+': '+CAPS[i]);b.onclick=()=>go(i,false);dotsEl.appendChild(b);return b;});
+function ui(){
+  dots.forEach((d,i)=>{if(i===cur)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current');});
+  $('back').disabled=cur===0;$('next').disabled=cur===STEPS.length-1;
+  $('svgDesc').textContent=STEPS[cur].desc;
+  $('live').textContent='Step '+(cur+1)+' of '+STEPS.length+'. '+STEPS[cur].desc;
+}
+function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+function go(i,animate){
+  stop();i=clamp(i,0,STEPS.length-1);cur=i;ui();
+  const st=STEPS[i];
+  if(!animate||reduce||st.e<=st.s){render(st.e);return;}
+  render(st.s);const t0=performance.now();
+  const tick=now=>{const t=st.s+(now-t0)/1000;if(t>=st.e){render(st.e);raf=null;return;}render(t);raf=requestAnimationFrame(tick);};
+  raf=requestAnimationFrame(tick);
+}
+$('next').onclick=()=>go(cur+1,true);
+$('back').onclick=()=>go(cur-1,false);
+$('restart').onclick=()=>go(0,false);
+$('fs').onclick=()=>{const d=document.documentElement;if(!document.fullscreenElement){(d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d);}else{(document.exitFullscreen||document.webkitExitFullscreen).call(document);}};
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='BUTTON'&&(e.key===' '||e.key==='Enter'))return;
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();if(cur<STEPS.length-1)go(cur+1,true);}
+  else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(cur-1,false);}
+  else if(e.key==='Home'){go(0,false);}
+});
+go(0,false);
+})();
+</script>
+</body></html>
