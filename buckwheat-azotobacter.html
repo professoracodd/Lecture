@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buckwheat + Azotobacter</title>
+
+<meta property="og:title" content="Buckwheat + Azotobacter">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://professoracodd.github.io/Lecture/buckwheat-azotobacter.html">
+<meta property="og:image" content="https://professoracodd.github.io/Lecture/buckwheat-azotobacter-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="Buckwheat + Azotobacter">
+<meta name="twitter:image" content="https://professoracodd.github.io/Lecture/buckwheat-azotobacter-preview.png">
+<meta name="twitter:player" content="https://professoracodd.github.io/Lecture/buckwheat-azotobacter.html">
+<meta name="twitter:player:width" content="800">
+<meta name="twitter:player:height" content="600">
+
+<meta name="description" content="Step-through animation: a buckwheat cover crop frees phosphorus with acidic root exudates and feeds inoculated Azotobacter, which fix nitrogen that amoebae release as ammonium.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d1d1d;--line:#d8d8d8;--accent:#2f6b1f;--accent-ink:#ffffff;--page:#eef1ea}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--page);font-family:Inter,'DejaVu Sans',system-ui,sans-serif;color:var(--ink)}
+.wrap{height:100%;display:flex;flex-direction:column}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px}
+.stage svg{width:min(100%, calc((100vh - 92px) * 4 / 3));width:min(100%, calc((100dvh - 92px) * 4 / 3));height:auto;aspect-ratio:4/3;display:block;background:#fff;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+svg text{font-family:Inter,'DejaVu Sans',sans-serif}
+.bar{flex:none;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 12px 12px;background:var(--page)}
+button{font:inherit;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);padding:9px 18px;cursor:pointer;min-height:44px}
+button svg{width:20px;height:20px;flex:none}
+button:hover{border-color:#a8a8a8}
+button:focus-visible{outline:3px solid #1f63c9;outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.primary:hover{background:#25561a;border-color:#25561a}
+button.icon{padding:9px 12px}
+.dots{display:flex;gap:8px;align-items:center;margin:0 4px}
+.dot{width:12px;height:12px;border-radius:50%;background:#c7cbc2;border:none;padding:0;min-height:0;cursor:pointer}
+.dot[aria-current="step"]{background:var(--accent);transform:scale(1.25)}
+.dot:focus-visible{outline:3px solid #1f63c9;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){button .lbl{display:none}button{padding:9px 12px}}
+</style></head>
+<body>
+<div class="wrap">
+<main class="stage">
+<svg id="s" role="img" aria-labelledby="svgTitle svgDesc" viewBox="0 0 1536 1152" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<title id="svgTitle">Buckwheat cover crop with Azotobacter</title><desc id="svgDesc">A buckwheat plant with roots in soil.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f7ee"/></linearGradient>
+  <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5233"/><stop offset="0.5" stop-color="#6a4429"/><stop offset="1" stop-color="#55361f"/></linearGradient>
+  <linearGradient id="acid" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ffe14d" stop-opacity="0.75"/><stop offset="0.55" stop-color="#ffe14d" stop-opacity="0.35"/><stop offset="1" stop-color="#ffe14d" stop-opacity="0"/></linearGradient>
+  <radialGradient id="rootGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffe14d" stop-opacity="0.55"/><stop offset="1" stop-color="#ffe14d" stop-opacity="0"/></radialGradient>
+  <radialGradient id="azoG" cx="0.35" cy="0.35" r="0.75"><stop offset="0" stop-color="#7fe0cf"/><stop offset="0.7" stop-color="#2aa08b"/><stop offset="1" stop-color="#16705f"/></radialGradient>
+  <radialGradient id="amoG" cx="0.4" cy="0.35" r="0.8"><stop offset="0" stop-color="#eef6fb" stop-opacity="0.95"/><stop offset="0.75" stop-color="#bcd7e8" stop-opacity="0.9"/><stop offset="1" stop-color="#8fb4cc" stop-opacity="0.95"/></radialGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.28"/></filter>
+  <filter id="lshadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.22"/></filter>
+  <clipPath id="clipZ"><circle cx="0" cy="0" r="318"/></clipPath>
+</defs>
+<rect width="1536" height="1152" fill="url(#sky)"/>
+<g id="soilG"></g>
+<g id="glowG"></g>
+<g id="rootsG"></g>
+<g id="plantG"></g>
+<g id="flowG"></g>
+<g id="partG"></g>
+<g id="zoomG"></g>
+<g id="labelG"></g>
+<g id="uiG"></g>
+</svg>
+</main>
+<nav class="bar" aria-label="Step controls">
+  <button id="restart" class="icon" aria-label="Start over"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+  <button id="back" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="lbl">Back</span></button>
+  <div class="dots" id="dots" role="group" aria-label="Jump to step"></div>
+  <button id="next" class="primary" aria-label="Next step"><span class="lbl">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="fs" class="icon" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<div id="live" class="sr" aria-live="polite"></div>
+</div>
+<script>
+(async function(){
+try{await Promise.race([Promise.all(['500 28px Inter','600 24px Inter','700 28px Inter','800 54px Inter'].map(f=>document.fonts.load(f))),new Promise(r=>setTimeout(r,2500))]);}catch(e){}
+const NS='http://www.w3.org/2000/svg';
+const W=1536,H=1152,G=520,SX=360;
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function $(id){return document.getElementById(id);}
+let seed=11;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const ss=x=>{x=clamp(x,0,1);return x*x*(3-2*x);};
+const eback=x=>{x=clamp(x,0,1);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const seg=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+const lerp=(a,b,u)=>a+(b-a)*u;
+
+// ---------- bezier helpers ----------
+function bz(p,t){const u=1-t;return [u*u*u*p[0][0]+3*u*u*t*p[1][0]+3*u*t*t*p[2][0]+t*t*t*p[3][0],u*u*u*p[0][1]+3*u*u*t*p[1][1]+3*u*t*t*p[2][1]+t*t*t*p[3][1]];}
+function bzd(p,t){const u=1-t;return [3*u*u*(p[1][0]-p[0][0])+6*u*t*(p[2][0]-p[1][0])+3*t*t*(p[3][0]-p[2][0]),3*u*u*(p[1][1]-p[0][1])+6*u*t*(p[2][1]-p[1][1])+3*t*t*(p[3][1]-p[2][1])];}
+function nrm(p,t){const d=bzd(p,t);const L=Math.hypot(d[0],d[1])||1;return [-d[1]/L,d[0]/L];}
+function taper(p,w0,w1,n=60){const L=[],R=[];for(let i=0;i<=n;i++){const t=i/n,q=bz(p,t),m=nrm(p,t),w=(w0+(w1-w0)*Math.pow(t,0.8))/2;
+  L.push([q[0]+m[0]*w,q[1]+m[1]*w]);R.push([q[0]-m[0]*w,q[1]-m[1]*w]);}
+  let d='M'+L.map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join('L');
+  d+=`A${(w1/2).toFixed(1)},${(w1/2).toFixed(1)} 0 0 1 `+R[R.length-1][0].toFixed(1)+','+R[R.length-1][1].toFixed(1);
+  d+='L'+R.reverse().map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join('L')+'Z';return d;}
+function lineP(a,b,n=20){const r=[];for(let i=0;i<=n;i++)r.push([a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n]);return r;}
+
+// ---------- soil ----------
+(function(){const g=$('soilG');
+  el('rect',{x:0,y:G,width:W,height:H-G,fill:'url(#soil)'},g);
+  for(let i=0;i<800;i++){const x=rnd()*W,y=G+12+rnd()*(H-G-12),r=3+rnd()*13;const dark=rnd()<0.5;
+    el('ellipse',{cx:x,cy:y,rx:r,ry:r*(0.55+rnd()*0.4),transform:`rotate(${rnd()*180} ${x} ${y})`,fill:dark?`rgba(50,30,15,${0.10+rnd()*0.15})`:`rgba(170,125,85,${0.08+rnd()*0.14})`},g);}
+  for(let i=0;i<60;i++){const x=rnd()*W,y=G+30+rnd()*(H-G-40),r=4+rnd()*8;
+    el('ellipse',{cx:x,cy:y,rx:r,ry:r*0.7,fill:`rgb(${150+rnd()*40|0},${140+rnd()*30|0},${125+rnd()*25|0})`,opacity:0.75,transform:`rotate(${rnd()*180} ${x} ${y})`},g);}
+  el('rect',{x:0,y:G-6,width:W,height:14,fill:'#5d9a37'},g);
+  let d='';for(let x=0;x<W;x+=7){const h=10+rnd()*20,lean=(rnd()-0.5)*10;d+=`M${x},${G+2}Q${x+lean/2},${G-h/2} ${x+lean},${G-h}Q${x+3+lean/2},${G-h/2} ${x+6},${G+2}Z`;}
+  el('path',{d,fill:'#6fb043'},g);
+  el('rect',{x:0,y:G+4,width:W,height:4,fill:'rgba(0,0,0,0.18)'},g);
+})();
+
+// ---------- roots ----------
+const tap=[[SX,G],[SX+6,660],[SX-8,860],[SX+4,1060]];
+const LAT=[
+ [[SX-2,580],[SX-50,600],[SX-130,640],[SX-190,720],10,2.5],
+ [[SX+2,600],[SX+60,615],[SX+150,650],[SX+230,720],10,2.5],
+ [[SX-3,700],[SX-40,720],[SX-100,770],[SX-140,850],8,2],
+ [[SX+1,720],[SX+50,740],[SX+120,790],[SX+170,870],8,2],
+ [[SX-4,840],[SX-30,860],[SX-70,900],[SX-90,960],6,1.6],
+ [[SX+2,860],[SX+40,880],[SX+80,920],[SX+100,980],6,1.6],
+ [[SX-150,650],[SX-170,670],[SX-190,700],[SX-200,740],4,1.4],
+ [[SX+150,650],[SX+175,640],[SX+205,650],[SX+230,670],4,1.4],
+];
+(function(){const g=$('rootsG');
+  const draw=(p,w0,w1)=>el('path',{d:taper(p,w0,w1),fill:'#f0e1c2',stroke:'#b99a6a','stroke-width':2},g);
+  LAT.slice().reverse().forEach(r=>draw(r.slice(0,4),r[4],r[5]));
+  draw(tap,22,4);
+})();
+// acid glow around roots (whole-plant view)
+const GLOW=el('g',{opacity:0},$('glowG'));
+(function(){[tap,...LAT.map(r=>r.slice(0,4))].forEach(p=>{for(let i=0;i<=8;i++){const q=bz(p,i/8);el('circle',{cx:q[0],cy:q[1],r:26,fill:'url(#rootGlow)'},GLOW);}});})();
+
+// ---------- buckwheat plant ----------
+(function(){const g=$('plantG');
+  const stem=[[SX,G+6],[SX-6,460],[SX+8,370],[SX,252]];
+  el('path',{d:taper(stem,14,6),fill:'#b5523f',stroke:'#8a3a2c','stroke-width':1.5},g);
+  const br1=[[SX+2,420],[SX+30,395],[SX+70,350],[SX+92,300]];el('path',{d:taper(br1,7,4),fill:'#b5523f',stroke:'#8a3a2c','stroke-width':1.2},g);
+  const br2=[[SX-1,380],[SX-30,350],[SX-60,315],[SX-78,278]];el('path',{d:taper(br2,7,4),fill:'#b5523f',stroke:'#8a3a2c','stroke-width':1.2},g);
+  // heart/arrow-shaped (sagittate) leaves
+  const leaf=(x,y,ang,s)=>{const gg=el('g',{transform:`translate(${x},${y}) rotate(${ang}) scale(${s})`},g);
+    el('path',{d:'M0,0 L26,0',stroke:'#7a8f3a','stroke-width':4,'stroke-linecap':'round'},gg);
+    el('path',{d:'M26,0 C30,-30 52,-40 66,-36 C74,-34 80,-26 108,0 C80,26 74,34 66,36 C52,40 30,30 26,0Z',fill:'#6aab48',stroke:'#4a8a2d','stroke-width':2.2},gg);
+    el('path',{d:'M28,0 L104,0 M60,0 L46,-20 M60,0 L46,20 M80,0 L70,-14 M80,0 L70,14',stroke:'#4a8a2d','stroke-width':1.6,fill:'none',opacity:0.85},gg);};
+  leaf(SX-4,488,-160,1.0);leaf(SX+3,455,-22,1.05);leaf(SX-2,415,-150,0.95);leaf(SX+40,385,-40,0.85);leaf(SX-36,350,-140,0.8);leaf(SX+4,318,-30,0.8);
+  // flower clusters (small white-pink racemes)
+  const cluster=(cx,cy,n,rad)=>{for(let i=0;i<n;i++){const a=rnd()*Math.PI*2,r=rnd()*rad,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r*1.3;
+      const f=el('g',{transform:`translate(${x},${y})`},g);
+      for(let k=0;k<5;k++){const aa=k*72*Math.PI/180;el('circle',{cx:Math.cos(aa)*4.5,cy:Math.sin(aa)*4.5,r:4.2,fill:'#fdf6f8',stroke:'#e2b3c1','stroke-width':1},f);}
+      el('circle',{cx:0,cy:0,r:2.4,fill:'#e7a1b6'},f);}};
+  cluster(SX,244,16,22);cluster(SX+94,292,12,18);cluster(SX-80,270,12,18);
+})();
+
+// ---------- flows (whole plant view) ----------
+const FLOW={};
+function mkFlow(name,pts,color,width,parent){const g=el('g',{},parent||$('flowG'));
+  const d='M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L');
+  const o=el('path',{d,fill:'none',stroke:'#fff','stroke-width':width+5,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'0 2',opacity:0.9},g);
+  const p=el('path',{d,fill:'none',stroke:color,'stroke-width':width,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'0 2'},g);
+  const n=pts.length,e=pts[n-1],b=pts[n-3];const a=Math.atan2(e[1]-b[1],e[0]-b[0]);
+  const head=el('path',{d:'M8,0 L-14,-12 L-14,12Z',fill:color,stroke:'#fff','stroke-width':2.5,transform:`translate(${e[0]+Math.cos(a)*6},${e[1]+Math.sin(a)*6}) rotate(${a*180/Math.PI})`,opacity:0},g);
+  const cum=[0];for(let i=1;i<n;i++)cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+  FLOW[name]={pts,cum,color,o,p,head,L:cum[n-1]};}
+function at(f,u){const s=u*f.L;let i=1;while(i<f.cum.length-1&&f.cum[i]<s)i++;const k=(s-f.cum[i-1])/(f.cum[i]-f.cum[i-1]||1);
+  return [f.pts[i-1][0]+(f.pts[i][0]-f.pts[i-1][0])*k,f.pts[i-1][1]+(f.pts[i][1]-f.pts[i-1][1])*k];}
+mkFlow('sug',lineP([SX-26,300],[SX-26,G+120]),'#e0801a',6);
+mkFlow('pUp',lineP([SX+26,G+120],[SX+26,310]),'#7b3fb0',6);
+mkFlow('nUp',lineP([SX+50,G+120],[SX+50,340]),'#1f63c9',6);
+function setDash(path,u){path.setAttribute('stroke-dasharray',`${u} 2`);path.setAttribute('visibility',u>0.002?'visible':'hidden');}
+function flowState(f,u){setDash(f.o,u);setDash(f.p,u);f.head.setAttribute('opacity',u>0.97?1:0);}
+const PG=$('partG');
+function particles(f,u,parent){const N=10,trav=0.5;for(let i=0;i<N;i++){const s=i/(N-1)*(1-trav);const k=(u-s)/trav;if(k<=0||k>=1)continue;
+    const p=at(f,ss(k)*0.98+0.01);el('circle',{cx:p[0],cy:p[1],r:9,fill:f.color,stroke:'#fff','stroke-width':2.5},parent||PG);}}
+
+// ---------- rhizosphere close-up ----------
+const Z={cx:1080,cy:800,r:318};
+const zq=bz(LAT[1].slice(0,4),0.7);Z.tx=zq[0];Z.ty=zq[1];
+const ZL=el('line',{x1:Z.tx,y1:Z.ty,x2:Z.cx-Z.r*0.97,y2:Z.cy-Z.r*0.2,stroke:'#fff','stroke-width':3,'stroke-dasharray':'8 6',opacity:0},$('zoomG'));
+const ZT=el('circle',{cx:Z.tx,cy:Z.ty,r:22,fill:'none',stroke:'#fff','stroke-width':3,opacity:0},$('zoomG'));
+const ZG=el('g',{transform:`translate(${Z.cx},${Z.cy})`,opacity:0},$('zoomG'));
+el('circle',{cx:0,cy:0,r:Z.r+7,fill:'#fff',filter:'url(#shadow)'},ZG);
+const zc=el('g',{'clip-path':'url(#clipZ)'},ZG);
+const ROOTY=150; // top surface of root in close-up
+// soil
+el('rect',{x:-340,y:-340,width:680,height:680,fill:'#7b5233'},zc);
+for(let i=0;i<160;i++){const x=-330+rnd()*660,y=-330+rnd()*470,r=6+rnd()*18;el('ellipse',{cx:x,cy:y,rx:r,ry:r*(0.6+rnd()*0.35),transform:`rotate(${rnd()*180} ${x} ${y})`,fill:rnd()<0.5?'rgba(45,28,14,0.25)':'rgba(170,125,85,0.22)'},zc);}
+// air pores
+const PORES=[[-180,-245,60,32],[120,-272,55,28],[-298,-110,36,24]];
+PORES.forEach(([x,y,rx,ry])=>{el('ellipse',{cx:x,cy:y,rx,ry,fill:'#2e1d10',opacity:0.55},zc);el('ellipse',{cx:x,cy:y-2,rx:rx-6,ry:ry-6,fill:'#d9cbb2',opacity:0.9},zc);});
+// acid zone
+const ACID=el('rect',{x:-340,y:ROOTY-150,width:680,height:150,fill:'url(#acid)',opacity:0},zc);
+// mineral grains with bound P
+const GRAINS=[[-220,-40,42],[-70,-140,46],[100,-120,40],[285,-40,38]];
+const PDOTS=[];
+GRAINS.forEach(([x,y,r],gi)=>{const gg=el('g',{transform:`translate(${x},${y})`},zc);
+  let pts=[];for(let k=0;k<9;k++){const a=k/9*Math.PI*2;const rr=r*(0.82+rnd()*0.3);pts.push([Math.cos(a)*rr,Math.sin(a)*rr*0.85]);}
+  el('polygon',{points:pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' '),fill:'#b9ab95',stroke:'#7d6f5c','stroke-width':2.5},gg);
+  el('ellipse',{cx:-r*0.3,cy:-r*0.3,rx:r*0.3,ry:r*0.18,fill:'#fff',opacity:0.3},gg);
+  for(let k=0;k<4;k++){const a=(k/4+rnd()*0.15)*Math.PI*2;const px=x+Math.cos(a)*r*0.92,py=y+Math.sin(a)*r*0.78;
+    const tx=lerp(-250,250,(gi*4+k)/15)+(rnd()-0.5)*30;
+    PDOTS.push({x:px,y:py,tx,ty:ROOTY+6,d:(gi*4+k)/16,rel:k<2});}
+  GRAINS[gi].g=gg;});
+const PDG=el('g',{},zc);
+// root (cross-section running left-right)
+el('rect',{x:-340,y:ROOTY,width:680,height:200,fill:'#ead9b6'},zc);
+for(let i=0;i<9;i++){el('rect',{x:-340+i*78+(i%2?20:0),y:ROOTY+8,width:72,height:46,rx:14,fill:'#f6ead0',stroke:'#c4a777','stroke-width':2.2},zc);}
+for(let i=0;i<9;i++){el('rect',{x:-370+i*82,y:ROOTY+62,width:76,height:56,rx:16,fill:'#f6ead0',stroke:'#c4a777','stroke-width':2.2},zc);}
+el('line',{x1:-340,y1:ROOTY,x2:340,y2:ROOTY,stroke:'#a8875a','stroke-width':4},zc);
+// root hairs
+for(let i=0;i<10;i++){const x=-300+i*64+rnd()*20,l=50+rnd()*60,c=(rnd()-0.5)*30;
+  el('path',{d:`M${x},${ROOTY} Q${x+c},${ROOTY-l/2} ${x+c*1.6},${ROOTY-l}`,fill:'none',stroke:'#f0e1c2','stroke-width':5,'stroke-linecap':'round'},zc);}
+// H+ particles group, sugar, N2, NH4 groups
+const ZP=el('g',{},zc);
+// Azotobacter (ovoid cells in pairs)
+const AZO=[];
+[[-260,88],[-150,94],[-45,72],[65,100],[160,62],[270,96],[228,22]].forEach(([x,y],i)=>{
+  const a=(rnd()-0.5)*50;const g=el('g',{transform:`translate(${x},${y}) scale(0)`},zc);
+  const cell=(dx)=>{const c=el('g',{transform:`translate(${dx},0)`},g);
+    el('ellipse',{cx:0,cy:0,rx:20,ry:16,fill:'url(#azoG)',stroke:'#0f5a4c','stroke-width':2.2},c);
+    const nd=el('g',{opacity:0},c);[[-7,-4],[5,3],[-2,7],[8,-5],[0,-1]].forEach(([u,v])=>el('circle',{cx:u,cy:v,r:3.2,fill:'#1f63c9'},nd));return nd;};
+  const n1=cell(-19),n2=cell(19);
+  AZO.push({x,y,a,g,nd:[n1,n2],eaten:false,delay:i*0.07});});
+// amoeba
+const AMO={g:el('g',{opacity:0},zc)};
+AMO.body=el('path',{d:'',fill:'url(#amoG)',stroke:'#5d88a6','stroke-width':3},AMO.g);
+AMO.nuc=el('circle',{cx:-10,cy:-6,r:16,fill:'#9cbbd2',stroke:'#5d88a6','stroke-width':2},AMO.g);
+AMO.vac=el('g',{},AMO.g);
+el('circle',{cx:0,cy:0,r:Z.r,fill:'none',stroke:'#6b5133','stroke-width':4},ZG);
+const ZLBL=el('g',{opacity:0},$('zoomG'));
+
+// ---------- labels ----------
+function rich(t,parts,fs){if(!Array.isArray(parts)){t.textContent=parts;return;}parts.forEach(s=>{const sp=el('tspan',{},t);if(typeof s==='string'){sp.textContent=s;}else{sp.textContent=s[0];sp.setAttribute('baseline-shift',s[1]=='sub'?'-25%':'40%');sp.setAttribute('font-size',fs*0.68);}});}
+function label(txt,x,y,opts={}){const g=el('g',{opacity:0},opts.parent||$('labelG'));
+  const fs=opts.fs||26;const t=el('text',{x:0,y:0,'font-size':fs,'font-weight':opts.fw||700,fill:opts.color||'#1f1f1f','text-anchor':'middle','dominant-baseline':'central'},g);
+  rich(t,txt,fs);const bb=t.getBBox();const px=13,py=7;
+  const r=el('rect',{x:bb.x-px,y:bb.y-py,width:bb.width+2*px,height:bb.height+2*py,rx:10,fill:opts.bg||'#fff',filter:'url(#lshadow)'},g);
+  g.insertBefore(r,t);g.setAttribute('transform',`translate(${x},${y})`);return g;}
+const LB={};
+const zx=(x)=>Z.cx+x, zy=(y)=>Z.cy+y;
+LB.zoom=label('Rhizosphere close-up',Z.cx,Z.cy-Z.r-30,{fs:26});
+LB.root=label('Root',zx(-230),zy(ROOTY+100),{fs:24});
+LB.acid=label(['Acidic exudates  (H',['+','sup'],')'],zx(-60),zy(ROOTY+40),{fs:24,color:'#1d1d1d',bg:'#ffe14d'});
+LB.bound=label('Bound P',zx(-70),zy(-75),{fs:22,fw:600,color:'#5b4a33'});
+LB.pfree=label(['H',['2','sub'],'PO',['4','sub'],['−','sup'],'  HPO',['4','sub'],['2−','sup']],zx(170),zy(-195),{fs:24,color:'#fff',bg:'#7b3fb0'});
+LB.azo=label('Azotobacter',zx(-200),zy(20),{fs:22,color:'#0f5a4c',fw:800});
+LB.sug=label('Sugars',zx(215),zy(ROOTY+40),{fs:24,color:'#fff',bg:'#e0801a'});
+LB.n2=label(['N',['2','sub'],' from soil air'],zx(-120),zy(-292),{fs:24,color:'#fff',bg:'#1f63c9'});
+LB.amo=label('Amoeba',zx(170),zy(-75),{fs:24,color:'#2f5d7c',fw:800});
+LB.nh4=label(['NH',['4','sub'],['+','sup'],' to root'],zx(150),zy(ROOTY+100),{fs:24,color:'#fff',bg:'#1f63c9'});
+// whole-plant labels
+LB.wsug=label('Sugars',SX-110,375,{fs:26,color:'#fff',bg:'#e0801a'});
+LB.wp=label('Phosphorus',SX+160,380,{fs:26,color:'#fff',bg:'#7b3fb0'});
+LB.wn=label('Nitrogen',SX+160,438,{fs:26,color:'#fff',bg:'#1f63c9'});
+
+// ---------- UI ----------
+const UI=$('uiG');
+el('text',{x:48,y:78,'font-size':54,'font-weight':800,fill:'#1d1d1d'},UI).textContent='Buckwheat + Azotobacter';
+el('text',{x:50,y:122,'font-size':28,'font-weight':500,fill:'#5b5b5b'},UI).textContent='A phosphorus cover crop that can also feed nitrogen';
+const CAPS=['Buckwheat cover crop','Roots release acidic exudates','Acids free bound phosphorus','Inoculate: plant feeds Azotobacter',['Azotobacter fix N',['2','sub'],' from soil air'],['Amoebae eat bacteria, release NH',['4','sub'],['+','sup']],'Incorporate: feeds the next crop'];
+const capG=CAPS.map((c,i)=>{const g=el('g',{opacity:0,transform:'translate(48,160)'},UI);
+  const t=el('text',{x:58,y:36,'font-size':30,'font-weight':700,fill:'#1d1d1d'},g);rich(t,c,30);
+  const bb=t.getBBox();
+  const r=el('rect',{x:0,y:0,width:bb.x+bb.width+22,height:54,rx:12,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#lshadow)'},g);g.insertBefore(r,t);
+  el('circle',{cx:30,cy:27,r:17,fill:'#2f6b1f'},g);
+  if(i>0&&i<6){const n=el('text',{x:30,y:28,'font-size':20,'font-weight':800,fill:'#fff','text-anchor':'middle','dominant-baseline':'central'},g);n.textContent=String(i);}
+  return g;});
+const SUM=el('g',{opacity:0,transform:'translate(1000,110)'},UI);
+el('rect',{x:0,y:0,width:500,height:302,rx:16,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#shadow)'},SUM);
+const rows=[['#e6c21a','Acids','free phosphorus'],['#e0801a','Sugars','feed Azotobacter'],['#2aa08b','Azotobacter',['fix N',['2','sub']]],['#1f63c9','Amoebae',['release NH',['4','sub'],['+','sup']]],['#2f6b1f','Incorporate','next crop']];
+rows.forEach((r,i)=>{const y=40+i*55;
+  el('circle',{cx:36,cy:y,r:14,fill:r[0]},SUM);
+  const t=el('text',{x:64,y:y,'font-size':27,'dominant-baseline':'central',fill:'#1d1d1d'},SUM);
+  const a=el('tspan',{'font-weight':800},t);a.textContent=r[1];
+  const b=el('tspan',{'font-weight':500,fill:'#444'},t);b.textContent='  →  ';
+  if(Array.isArray(r[2])){r[2].forEach(s=>{const sp=el('tspan',{'font-weight':500,fill:'#444'},t);if(typeof s==='string')sp.textContent=s;else{sp.textContent=s[0];sp.setAttribute('baseline-shift',s[1]=='sub'?'-25%':'40%');sp.setAttribute('font-size',18);}});}
+  else{const c=el('tspan',{'font-weight':500,fill:'#444'},t);c.textContent=r[2];}});
+
+// ---------- render ----------
+const T={s1:2,s2:8,s3:14,s4:20,s5:26,s6:34};
+function pop(g,x,y,u,extra=''){g.setAttribute('transform',`translate(${x},${y}) ${extra} scale(${Math.max(0,eback(u))})`);}
+function fade(g,u){g.setAttribute('opacity',ss(u));}
+function amoebaPath(R,ph){let d='';for(let i=0;i<=48;i++){const a=i/48*Math.PI*2;const r=R*(1+0.13*Math.sin(3*a+ph)+0.09*Math.sin(5*a-1.3*ph)+0.05*Math.sin(2*a+0.7));
+  d+=(i?'L':'M')+(Math.cos(a)*r*1.15).toFixed(1)+','+(Math.sin(a)*r*0.9).toFixed(1);}return d+'Z';}
+const N2SRC=[[-298,-110],[-180,-245],[-180,-245],[120,-272],[120,-272],[120,-272],[120,-272]];
+const EATEN=[4,6,3]; // indices of Azotobacter pairs the amoeba eats
+const AMO_START=[420,-300],AMO_END=[175,30];
+window.render=function(t){
+  PG.innerHTML='';ZP.innerHTML='';PDG.innerHTML='';AMO.vac.innerHTML='';
+  const capT=[0,T.s1,T.s2,T.s3,T.s4,T.s5,T.s6,1e9];
+  capG.forEach((g,i)=>{let o=ss(seg(t,capT[i],capT[i]+0.5))*(1-ss(seg(t,capT[i+1],capT[i+1]+0.4)));if(i==0)o=1-ss(seg(t,T.s1,T.s1+0.4));g.setAttribute('opacity',o);});
+  // step 1: acid exudates
+  const zu=seg(t,T.s1,T.s1+1.0);
+  ZG.setAttribute('opacity',ss(zu));ZG.setAttribute('transform',`translate(${Z.cx},${Z.cy}) scale(${0.6+0.4*eback(zu)})`);
+  ZL.setAttribute('opacity',ss(zu));ZT.setAttribute('opacity',ss(zu));fade(LB.zoom,seg(t,T.s1+0.6,T.s1+1.0));fade(LB.root,seg(t,T.s1+0.8,T.s1+1.2));
+  const au=seg(t,T.s1+1.0,T.s1+3.4);
+  ACID.setAttribute('opacity',ss(au));GLOW.setAttribute('opacity',0.6*ss(au));
+  if(au>0&&au<1){for(let i=0;i<14;i++){const s=i/13*0.55;const k=(au-s)/0.45;if(k<=0||k>=1)continue;const x=-290+i*44,y=ROOTY-ss(k)*120;
+      const tt=el('text',{x,y,'font-size':20,'font-weight':800,fill:'#7a6200','text-anchor':'middle',opacity:1-k*0.6},ZP);tt.textContent='H+';}}
+  fade(LB.acid,seg(t,T.s1+2.8,T.s1+3.3));
+  // step 2: phosphorus released
+  const pu=seg(t,T.s2,T.s2+3.4);
+  fade(LB.bound,seg(t,T.s2,T.s2+0.5));
+  GRAINS.forEach(([x,y,r],i)=>{const sc=1-0.12*ss(pu);GRAINS[i].g.setAttribute('transform',`translate(${x},${y}) scale(${sc})`);});
+  PDOTS.forEach(p=>{const k=p.rel?ss(clamp((pu-p.d*0.5)/0.5,0,1)):0;
+    if(k>=1)return; // absorbed into root
+    const x=lerp(p.x,p.tx,k),y=lerp(p.y,p.ty,k)-Math.sin(k*Math.PI)*20;
+    el('circle',{cx:x,cy:y,r:8,fill:'#7b3fb0',stroke:'#fff','stroke-width':2},PDG);});
+  fade(LB.pfree,seg(t,T.s2+0.6,T.s2+1.1));
+  flowState(FLOW.pUp,ss(seg(t,T.s2+1.8,T.s2+3.6)));if(t>T.s2+1.8&&t<T.s2+3.6)particles(FLOW.pUp,seg(t,T.s2+1.8,T.s2+3.6));
+  fade(LB.wp,seg(t,T.s2+3.2,T.s2+3.7));
+  // step 3: Azotobacter appear + sugars
+  AZO.forEach(a=>{if(!a.eatenPos)pop(a.g,a.x,a.y,seg(t,T.s3+a.delay*4,T.s3+a.delay*4+0.7),`rotate(${a.a})`);});
+  fade(LB.azo,seg(t,T.s3+0.8,T.s3+1.3));
+  const su=seg(t,T.s3+1.2,T.s3+3.6);
+  if(su>0&&su<1){AZO.forEach((a,i)=>{for(let j=0;j<3;j++){const k=(su-j*0.22-i*0.03)/0.4;if(k<=0||k>=1)continue;
+      const x=lerp(a.x+(j-1)*12,a.x,ss(k)),y=lerp(ROOTY+4,a.y+14,ss(k));
+      el('circle',{cx:x,cy:y,r:7,fill:'#e0801a',stroke:'#fff','stroke-width':2},ZP);}});}
+  fade(LB.sug,seg(t,T.s3+1.2,T.s3+1.7));
+  flowState(FLOW.sug,ss(seg(t,T.s3+0.4,T.s3+2.2)));if(t>T.s3+0.4&&t<T.s3+2.2)particles(FLOW.sug,seg(t,T.s3+0.4,T.s3+2.2));
+  fade(LB.wsug,seg(t,T.s3+2.0,T.s3+2.5));
+  // step 4: N2 fixation
+  fade(LB.n2,seg(t,T.s4,T.s4+0.5));
+  const nu=seg(t,T.s4+0.4,T.s4+3.2);
+  if(nu>0&&nu<1){AZO.forEach((a,i)=>{const src=N2SRC[i];const k=ss(clamp((nu-i*0.06)/0.6,0,1));if(k<=0||k>=1)return;
+      const x=lerp(src[0],a.x,k),y=lerp(src[1],a.y,k);const ang=k*200;
+      const m=el('g',{transform:`translate(${x},${y}) rotate(${ang})`},ZP);
+      el('circle',{cx:-7,cy:0,r:8,fill:'#1f63c9',stroke:'#fff','stroke-width':2},m);el('circle',{cx:7,cy:0,r:8,fill:'#1f63c9',stroke:'#fff','stroke-width':2},m);});}
+  AZO.forEach((a,i)=>{const k=ss(seg(t,T.s4+1.6+i*0.12,T.s4+2.2+i*0.12));a.nd.forEach(n=>n.setAttribute('opacity',k));});
+  // step 5: amoeba grazing -> NH4+
+  const mu=seg(t,T.s5,T.s5+2.0);
+  AMO.g.setAttribute('opacity',ss(seg(t,T.s5,T.s5+0.4)));
+  const ax=lerp(AMO_START[0],AMO_END[0],ss(mu)),ay=lerp(AMO_START[1],AMO_END[1],ss(mu));
+  const R=lerp(62,74,ss(seg(t,T.s5+2.0,T.s5+3.2)));
+  AMO.body.setAttribute('d',amoebaPath(R,t*1.6));
+  AMO.g.setAttribute('transform',`translate(${ax},${ay})`);
+  fade(LB.amo,seg(t,T.s5+0.8,T.s5+1.3));
+  const eu=seg(t,T.s5+1.6,T.s5+3.4);
+  EATEN.forEach((idx,j)=>{const a=AZO[idx];const k=ss(clamp((eu-j*0.2)/0.6,0,1));
+    if(k>0){const x=lerp(a.x,ax+(j-1)*26,k),y=lerp(a.y,ay+16,k);a.g.setAttribute('transform',`translate(${x},${y}) rotate(${a.a}) scale(${1-0.45*k})`);a.g.setAttribute('opacity',1-0.85*ss(seg(k,0.7,1)));}
+    else{a.g.setAttribute('opacity',1);}
+    if(k>=1)el('circle',{cx:(j-1)*26,cy:16,r:12,fill:'#c9e3dd',stroke:'#2aa08b','stroke-width':2,opacity:0.85},AMO.vac);});
+  const xu=seg(t,T.s5+3.4,T.s5+6.0);
+  if(xu>0&&xu<1){for(let i=0;i<12;i++){const k=(xu-i*0.05)/0.45;if(k<=0||k>=1)continue;
+      const tx=lerp(ax-140,ax+150,i/11),x=lerp(ax+(i%3-1)*20,tx,ss(k)),y=lerp(ay+30,ROOTY+4,ss(k));
+      el('circle',{cx:x,cy:y,r:8,fill:'#1f63c9',stroke:'#fff','stroke-width':2},ZP);}}
+  fade(LB.nh4,seg(t,T.s5+3.6,T.s5+4.1));
+  flowState(FLOW.nUp,ss(seg(t,T.s5+4.2,T.s5+6.0)));if(t>T.s5+4.2&&t<T.s5+6.0)particles(FLOW.nUp,seg(t,T.s5+4.2,T.s5+6.0));
+  fade(LB.wn,seg(t,T.s5+5.6,T.s5+6.1));
+  // step 6: summary
+  fade(SUM,seg(t,T.s6,T.s6+0.8));
+};
+
+// ---------- step player ----------
+const STEPS=[
+ {s:0,e:0,desc:'A buckwheat cover crop with its root system in the soil.'},
+ {s:T.s1,e:T.s1+3.4,desc:'A close-up of the rhizosphere opens. Buckwheat roots release acidic exudates, hydrogen ions, into the soil around the root.'},
+ {s:T.s2,e:T.s2+3.7,desc:'The acids free phosphorus bound to mineral particles. Phosphate ions, H2PO4 minus and HPO4 2 minus, move to the root and up to the plant.'},
+ {s:T.s3,e:T.s3+3.6,desc:'Inoculated Azotobacter bacteria live around the root. The plant sends sugars down and out to feed them.'},
+ {s:T.s4,e:T.s4+3.2,desc:'Azotobacter take N2 gas from air pores in the soil and fix it into their own cells.'},
+ {s:T.s5,e:T.s5+6.1,desc:'An amoeba eats Azotobacter cells and releases the extra nitrogen as ammonium, NH4 plus, which the root takes up.'},
+ {s:T.s6,e:T.s6+0.8,desc:'Summary: acids free phosphorus, sugars feed Azotobacter, Azotobacter fix N2, amoebae release ammonium, and incorporating the buckwheat feeds the next crop.'}
+];
+let cur=0,raf=null;
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const dotsEl=$('dots');
+const capText=c=>Array.isArray(c)?c.map(s=>typeof s==='string'?s:s[0]).join(''):c;
+const dots=STEPS.map((st,i)=>{const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Step '+(i+1)+': '+capText(CAPS[i]));b.onclick=()=>go(i,false);dotsEl.appendChild(b);return b;});
+function ui(){
+  dots.forEach((d,i)=>{if(i===cur)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current');});
+  $('back').disabled=cur===0;$('next').disabled=cur===STEPS.length-1;
+  $('svgDesc').textContent=STEPS[cur].desc;
+  $('live').textContent='Step '+(cur+1)+' of '+STEPS.length+'. '+STEPS[cur].desc;
+}
+function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+function go(i,animate){
+  stop();i=clamp(i,0,STEPS.length-1);cur=i;ui();
+  const st=STEPS[i];
+  if(!animate||reduce||st.e<=st.s){render(st.e);return;}
+  render(st.s);const t0=performance.now();
+  const tick=now=>{const t=st.s+(now-t0)/1000;if(t>=st.e){render(st.e);raf=null;return;}render(t);raf=requestAnimationFrame(tick);};
+  raf=requestAnimationFrame(tick);
+}
+$('next').onclick=()=>go(cur+1,true);
+$('back').onclick=()=>go(cur-1,false);
+$('restart').onclick=()=>go(0,false);
+$('fs').onclick=()=>{const d=document.documentElement;if(!document.fullscreenElement){(d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d);}else{(document.exitFullscreen||document.webkitExitFullscreen).call(document);}};
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='BUTTON'&&(e.key===' '||e.key==='Enter'))return;
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();if(cur<STEPS.length-1)go(cur+1,true);}
+  else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(cur-1,false);}
+  else if(e.key==='Home'){go(0,false);}
+});
+go(0,false);
+})();
+</script>
+</body></html>
