@@ -16,7 +16,7 @@
 <meta name="twitter:player:width" content="800">
 <meta name="twitter:player:height" content="600">
 
-<meta name="description" content="Step-through animation of a one-year garlic, buckwheat and cowpea, potato rotation showing how phosphorus moves from deep soil into plants, microbes and potato tubers.">
+<meta name="description" content="Step-through animation of a one-year garlic, buckwheat and cowpea, potato rotation showing how phosphorus and nitrogen move from deep soil into plants, microbes and potato tubers.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -57,7 +57,7 @@ button.icon{padding:9px 12px}
   <filter id="lshadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.22"/></filter>
 </defs>
 <rect width="1536" height="1152" fill="url(#sky)"/>
-<g id="soilG"></g><g id="grainG"></g><g id="acidG"></g><g id="rootsG"></g><g id="resG"></g><g id="micG"></g><g id="hyphG"></g><g id="potG"></g><g id="garlicG"></g><g id="coverG"></g><g id="compG"></g><g id="tokG"></g><g id="labelG"></g><g id="uiG"></g><g id="tlG"></g>
+<g id="soilG"></g><g id="grainG"></g><g id="acidG"></g><g id="rootsG"></g><g id="resG"></g><g id="micG"></g><g id="azoG"></g><g id="hyphG"></g><g id="potG"></g><g id="garlicG"></g><g id="coverG"></g><g id="compG"></g><g id="tokG"></g><g id="labelG"></g><g id="uiG"></g><g id="tlG"></g>
 </svg>
 </main>
 <nav class="bar" aria-label="Step controls">
@@ -214,6 +214,14 @@ const PX=[260,600,940];const pot=[];
       hy.push(el('path',{d,stroke:'#f7efd9','stroke-width':2,fill:'none','stroke-linecap':'round',pathLength:1,'stroke-dasharray':'0 2'},hg));}
     pot.push({rg,sg,tubers,hy,x,y:G+70});});
 })();
+// Azotobacter pairs on buckwheat roots (inoculated)
+const AZO=[];
+(function(){const g=$('azoG');
+  BROOTS.forEach(b=>{for(let k=0;k<4;k++){const q=bz(b.tap,0.06+k*0.07);const x=q[0]+(k%2?22:-22),y=q[1];
+    const gg=el('g',{transform:`translate(${x},${y}) scale(0)`},g);
+    [-8,8].forEach(dx=>el('ellipse',{cx:dx,cy:0,rx:8,ry:6,fill:'#2aa08b',stroke:'#0f5a4c','stroke-width':1.5},gg));
+    AZO.push({g:gg,x,y,d:rnd()*0.4});}});
+})();
 // compost layer
 const COMP=el('g',{opacity:0},$('compG'));
 (function(){el('path',{d:`M0,${G-4} `+Array.from({length:65},(_,i)=>`L${i*24},${G-10-rnd()*10}`).join('')+` L${W},${G+6} L0,${G+6}Z`,fill:'#3d2a18'},COMP);
@@ -242,6 +250,18 @@ GRAINS.forEach((gr,gi)=>{for(let k=0;k<2;k++){const a=rnd()*Math.PI*2;const x=gr
   const p=near(pot,m.x,m.y);const tb=p.tubers[Math.floor(rnd()*p.tubers.length)];
   st[6]=[st[5][1],[tb.x+(rnd()-0.5)*20,tb.y+(rnd()-0.5)*10]];st[7]=[st[6][1]];
   TOK.push({st,col:'#7b3fb0'});}});
+// group N: nitrogen fixed by Azotobacter (from soil air) and cowpea nodules
+const NTOK=[];
+AZO.forEach((az,i)=>{const st=[];for(let s=0;s<3;s++)st[s]=null;
+  const sx=az.x+(rnd()-0.5)*60;st[3]=[[sx,G-30],[az.x+(rnd()-0.5)*10,az.y-4]];
+  st[4]=[st[3][1]];const m=near(MIC,az.x,az.y);st[5]=[st[4][0],[m.x+(rnd()-0.5)*8,m.y+(rnd()-0.5)*8]];
+  const p=near(pot,m.x,m.y);const tb=p.tubers[Math.floor(rnd()*p.tubers.length)];st[6]=[st[5][1],[tb.x+(rnd()-0.5)*24,tb.y+(rnd()-0.5)*12]];st[7]=[st[6][1]];
+  NTOK.push({st,col:'#1f63c9'});});
+cow.forEach(c=>c.nods.forEach((n,k)=>{if(k>2)return;const x=+n.getAttribute('cx'),y=+n.getAttribute('cy');const st=[];for(let s=0;s<3;s++)st[s]=null;
+  st[3]=[[x,y-6],[x,y]];st[4]=[[x,y]];const m=near(MIC,x,y);st[5]=[[x,y],[m.x+(rnd()-0.5)*8,m.y+(rnd()-0.5)*8]];
+  const p=near(pot,m.x,m.y);const tb=p.tubers[Math.floor(rnd()*p.tubers.length)];st[6]=[st[5][1],[tb.x+(rnd()-0.5)*24,tb.y+(rnd()-0.5)*12]];st[7]=[st[6][1]];
+  NTOK.push({st,col:'#1f63c9'});}));
+NTOK.forEach(t=>{t.d=rnd()*0.45;TOK.push(t);});
 // group C: compost P
 for(let i=0;i<14;i++){const x=60+rnd()*(W-120);const st=[];for(let s=0;s<7;s++)st[s]=null;st[7]=[[x,G-8],[x+(rnd()-0.5)*40,G+40+rnd()*120]];TOK.push({st,col:'#7b3fb0',comp:true});}
 TOK.forEach(t=>{t.d=rnd()*0.45;});
@@ -266,19 +286,20 @@ LB.harvest=label('Harvest removes P',1180,200,{fs:23,color:'#fff',bg:'#7b3fb0'})
 LB.bound=label('Bound P deep in the subsoil',1180,TOP+250,{fs:22,color:'#5b4a33'});
 LB.cowpea=label('Cowpea: fixes N, keeps fungi fed',1180,300,{fs:23,color:'#2f6b1f'});
 LB.acid=label('Acid exudates free deep P',1180,TOP+190,{fs:22,color:'#1d1d1d',bg:'#ffe14d'});
+LB.azo=label(['Azotobacter + cowpea fix N',['2','sub']],1180,G+60,{fs:22,color:'#fff',bg:'#1f63c9'});
 LB.up=label('P moves up into the plant',1180,360,{fs:23,color:'#fff',bg:'#7b3fb0'});
-LB.inc=label('Residue + P land in the topsoil',1180,300,{fs:23});
+LB.inc=label('Residue + N + P land in the topsoil',1180,300,{fs:23});
 LB.roots=label('Roots decay in place, all the way down',1180,TOP+190,{fs:22});
-LB.mic=label('Microbe bloom holds the P',1180,300,{fs:23,color:'#fff',bg:'#0f8a7a'});
+LB.mic=label('Microbe bloom holds the N + P',1180,300,{fs:23,color:'#fff',bg:'#0f8a7a'});
 LB.myco=label('Inoculated: fungi reach the P',1240,560,{fs:22,color:'#5d4a1c'});
-LB.tub=label('P feeds tuber set and starch',1240,620,{fs:22,color:'#fff',bg:'#7b3fb0'});
+LB.tub=label('N + P feed the tubers',1240,620,{fs:22,color:'#fff',bg:'#7b3fb0'});
 LB.comp=label('Compost adds P back',1290,G+70,{fs:23,color:'#3d2a18'});
 
 // ---------- UI ----------
 const UI=$('uiG');
 el('text',{x:48,y:76,'font-size':50,'font-weight':800,fill:'#1d1d1d'},UI).textContent='Garlic → Buckwheat → Potato';
-el('text',{x:50,y:116,'font-size':26,'font-weight':500,fill:'#5b5b5b'},UI).textContent='Moving phosphorus through a living soil in one year';
-const CAPS=['Nov: plant garlic','Garlic draws P from the topsoil','May: harvest garlic, sow buckwheat + cowpea','Buckwheat pulls P up from deep soil','June: incorporate into the topsoil','Microbes bloom and hold the P','Aug: inoculated potatoes take up cycled P','Compost replaces what harvests remove'];
+el('text',{x:50,y:116,'font-size':26,'font-weight':500,fill:'#5b5b5b'},UI).textContent='Moving phosphorus and nitrogen through a living soil in one year';
+const CAPS=['Nov: plant garlic','Garlic draws P from the topsoil','May: harvest garlic, sow inoculated buckwheat + cowpea','Buckwheat lifts deep P; N is fixed','June: incorporate into the topsoil','Microbes bloom and hold the N + P','Aug: inoculated potatoes take up cycled N + P','Compost replaces what harvests remove'];
 const capG=CAPS.map((c,i)=>{const g=el('g',{opacity:0,transform:'translate(48,140)'},UI);
   const t=el('text',{x:58,y:36,'font-size':28,'font-weight':700,fill:'#1d1d1d'},g);t.textContent=c;
   const bb=t.getBBox();
@@ -286,10 +307,15 @@ const capG=CAPS.map((c,i)=>{const g=el('g',{opacity:0,transform:'translate(48,14
   el('circle',{cx:30,cy:27,r:17,fill:'#2f6b1f'},g);
   const n=el('text',{x:30,y:28,'font-size':20,'font-weight':800,fill:'#fff','text-anchor':'middle','dominant-baseline':'central'},g);n.textContent=String(i+1);
   return g;});
+// dot legend
+(function(){const lg=el('g',{transform:'translate(1196,48)'},UI);
+  el('rect',{x:0,y:0,width:304,height:52,rx:12,fill:'#fff',stroke:'#d8d8d8','stroke-width':2},lg);
+  el('circle',{cx:24,cy:26,r:9,fill:'#7b3fb0',stroke:'#fff','stroke-width':2},lg);el('text',{x:40,y:34,'font-size':22,'font-weight':700,fill:'#1d1d1d'},lg).textContent='Phosphorus';
+  el('circle',{cx:184,cy:26,r:9,fill:'#1f63c9',stroke:'#fff','stroke-width':2},lg);el('text',{x:200,y:34,'font-size':22,'font-weight':700,fill:'#1d1d1d'},lg).textContent='Nitrogen';})();
 // summary
 const SUM=el('g',{opacity:0,transform:'translate(1070,150)'},UI);
-el('rect',{x:0,y:0,width:432,height:300,rx:16,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#shadow)'},SUM);
-[['#7b3fb0','Harvests','remove P'],['#b5523f','Buckwheat','lifts deep P'],['#2f8f4e','Cowpea','adds N + fungi'],['#0f8a7a','Microbes','store + cycle P'],['#3d2a18','Compost','adds P back']].forEach((r,i)=>{
+el('rect',{x:0,y:0,width:432,height:355,rx:16,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#shadow)'},SUM);
+[['#7b3fb0','Harvests','remove P'],['#b5523f','Buckwheat','lifts deep P'],['#2f8f4e','Cowpea','adds N + fungi'],['#1f63c9','Azotobacter','adds N'],['#0f8a7a','Microbes','store + cycle N, P'],['#3d2a18','Compost','adds P back']].forEach((r,i)=>{
   const y=38+i*55;el('circle',{cx:32,cy:y,r:13,fill:r[0]},SUM);
   const t=el('text',{x:58,y,'font-size':25,'dominant-baseline':'central',fill:'#1d1d1d'},SUM);
   el('tspan',{'font-weight':800},t).textContent=r[1];const b=el('tspan',{'font-weight':500,fill:'#444'},t);b.textContent='  →  '+r[2];});
@@ -337,6 +363,7 @@ window.render=function(t){
     p.tubers.forEach(tb=>tb.g.setAttribute('transform',`translate(${tb.x},${tb.y}) scale(${tub})`));
     p.hy.forEach((h,i)=>{const v=ss(clamp((P(6)-0.15-i*0.03)/0.5,0,1));h.setAttribute('stroke-dasharray',`${v} 2`);h.setAttribute('visibility',v>0.002?'visible':'hidden');});});
   COMP.setAttribute('opacity',ss(clamp(P(7)/0.3,0,1)));
+  AZO.forEach(az=>{const v=ss(clamp((P(2)-0.6-az.d*0.5)/0.3,0,1))*(1-ss(clamp(P(5)/0.6,0,1)));az.g.setAttribute('transform',`translate(${az.x},${az.y}) scale(${eback(v)})`);az.g.setAttribute('opacity',v>0.01?1:0);});
   // tokens
   TG.innerHTML='';
   TOK.forEach(tk=>{
@@ -363,7 +390,7 @@ window.render=function(t){
   L(LB.bound,2,0.6);off(LB.bound,4);
   L(LB.cowpea,2,0.75);if(k===2)LB.garlic.setAttribute('opacity',0);off(LB.cowpea,3);
   if(k===2){LB.harvest.setAttribute('opacity',clamp(1-ss((u-0.55)/0.15),0,1)*ss(clamp((t-T[2])/0.5,0,1)));LB.cowpea.setAttribute('opacity',ss(clamp((u-0.72)/0.12,0,1)));}
-  L(LB.acid,3,0.05);L(LB.up,3,0.55);off(LB.acid,4);off(LB.up,4);
+  L(LB.acid,3,0.05);L(LB.up,3,0.55);L(LB.azo,3,0.3);off(LB.acid,4);off(LB.up,4);off(LB.azo,4);
   L(LB.inc,4,0.6);L(LB.roots,4,0.75);off(LB.inc,5);off(LB.roots,5);
   L(LB.mic,5,0.5);off(LB.mic,6);
   L(LB.myco,6,0.4);L(LB.tub,6,0.8);off(LB.myco,7);off(LB.tub,7);
@@ -374,12 +401,12 @@ window.render=function(t){
 // ---------- step player ----------
 const DESC=['November: garlic is planted. The soil profile shows a dark topsoil over a lighter subsoil, with phosphorus bound to mineral particles deep down.',
  'Through winter and spring, garlic grows. Its shallow roots draw phosphorus from the topsoil into the bulbs.',
- 'In May the garlic is harvested, and the phosphorus in the bulbs leaves the field. Buckwheat and cowpea are sown. Buckwheat roots reach deep into the subsoil; cowpea forms nitrogen-fixing nodules and keeps mycorrhizal fungi fed.',
- 'Buckwheat roots release acid exudates that free bound phosphorus deep in the subsoil. The plant takes it up and moves it into its leaves and stems.',
+ 'In May the garlic is harvested, and the phosphorus in the bulbs leaves the field. Buckwheat seed inoculated with Azotobacter is sown with cowpea. Buckwheat roots reach deep into the subsoil; cowpea forms nitrogen-fixing nodules and keeps mycorrhizal fungi fed.',
+ 'Buckwheat roots release acid exudates that free bound phosphorus deep in the subsoil. The plant takes it up and moves it into its leaves and stems. Meanwhile Azotobacter on the buckwheat roots and the cowpea nodules fix nitrogen from the air into living cells.',
  'About 40 days after sowing, in June, the buckwheat and cowpea are incorporated. The residue and its phosphorus land in the topsoil, and the roots decay in place all the way down.',
- 'Through the summer, decomposition drives a bloom of microbes in the topsoil and along the old root channels. The phosphorus moves into microbial biomass.',
- 'In August, whole seed potatoes are planted and inoculated with mycorrhizal fungi. The soil food web cycles phosphorus out of the microbes, the fungi reach it, and it feeds tuber set and starch.',
- 'Compost is added to replace the phosphorus removed by the garlic and potato harvests. Summary: harvests remove P, buckwheat lifts deep P, cowpea adds nitrogen and fungi, microbes store and cycle P, and compost adds P back.'];
+ 'Through the summer, decomposition drives a bloom of microbes in the topsoil and along the old root channels. The phosphorus and the fixed nitrogen move into microbial biomass.',
+ 'In August, whole seed potatoes are planted and inoculated with mycorrhizal fungi. The soil food web cycles phosphorus out of the microbes, the fungi reach it, and the nitrogen and phosphorus feed the tubers.',
+ 'Compost is added to replace the phosphorus removed by the garlic and potato harvests. Summary: harvests remove P, buckwheat lifts deep P, cowpea and Azotobacter add nitrogen, microbes store and cycle nitrogen and phosphorus, and compost adds P back.'];
 const STEPS=CAPS.map((c,i)=>({s:T[i],e:T[i]+DUR[i],desc:DESC[i]}));
 let cur=0,raf=null;
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
