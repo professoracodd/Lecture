@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garlic, Buckwheat, Potato</title>
+
+<meta property="og:title" content="Garlic, Buckwheat, Potato">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://professoracodd.github.io/Lecture/garlic-buckwheat-potato.html">
+<meta property="og:image" content="https://professoracodd.github.io/Lecture/garlic-buckwheat-potato-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="Garlic, Buckwheat, Potato">
+<meta name="twitter:image" content="https://professoracodd.github.io/Lecture/garlic-buckwheat-potato-preview.png">
+<meta name="twitter:player" content="https://professoracodd.github.io/Lecture/garlic-buckwheat-potato.html">
+<meta name="twitter:player:width" content="800">
+<meta name="twitter:player:height" content="600">
+
+<meta name="description" content="Step-through animation of a one-year garlic, buckwheat and cowpea, potato rotation showing how phosphorus moves from deep soil into plants, microbes and potato tubers.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d1d1d;--line:#d8d8d8;--accent:#2f6b1f;--accent-ink:#ffffff;--page:#eef1ea}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--page);font-family:Inter,'DejaVu Sans',system-ui,sans-serif;color:var(--ink)}
+.wrap{height:100%;display:flex;flex-direction:column}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px}
+.stage svg{width:min(100%, calc((100vh - 92px) * 4 / 3));width:min(100%, calc((100dvh - 92px) * 4 / 3));height:auto;aspect-ratio:4/3;display:block;background:#fff;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+svg text{font-family:Inter,'DejaVu Sans',sans-serif}
+.bar{flex:none;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 12px 12px;background:var(--page)}
+button{font:inherit;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:8px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);padding:9px 18px;cursor:pointer;min-height:44px}
+button svg{width:20px;height:20px;flex:none}
+button:hover{border-color:#a8a8a8}
+button:focus-visible{outline:3px solid #1f63c9;outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.primary:hover{background:#25561a;border-color:#25561a}
+button.icon{padding:9px 12px}
+.dots{display:flex;gap:8px;align-items:center;margin:0 4px}
+.dot{width:12px;height:12px;border-radius:50%;background:#c7cbc2;border:none;padding:0;min-height:0;cursor:pointer}
+.dot[aria-current="step"]{background:var(--accent);transform:scale(1.25)}
+.dot:focus-visible{outline:3px solid #1f63c9;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){button .lbl{display:none}button{padding:9px 12px}}
+</style></head>
+<body>
+<div class="wrap">
+<main class="stage">
+<svg id="s" role="img" aria-labelledby="svgTitle svgDesc" viewBox="0 0 1536 1152" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<title id="svgTitle">Garlic, buckwheat and potato rotation: moving phosphorus</title><desc id="svgDesc">A soil profile under a garlic crop.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f7ee"/></linearGradient>
+  <linearGradient id="topsoil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3020"/><stop offset="1" stop-color="#5e3f27"/></linearGradient>
+  <linearGradient id="subsoil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a7652"/><stop offset="1" stop-color="#b08d66"/></linearGradient>
+  <radialGradient id="acidGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffe14d" stop-opacity="0.65"/><stop offset="1" stop-color="#ffe14d" stop-opacity="0"/></radialGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.28"/></filter>
+  <filter id="lshadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.22"/></filter>
+</defs>
+<rect width="1536" height="1152" fill="url(#sky)"/>
+<g id="soilG"></g><g id="grainG"></g><g id="acidG"></g><g id="rootsG"></g><g id="resG"></g><g id="micG"></g><g id="hyphG"></g><g id="potG"></g><g id="garlicG"></g><g id="coverG"></g><g id="compG"></g><g id="tokG"></g><g id="labelG"></g><g id="uiG"></g><g id="tlG"></g>
+</svg>
+</main>
+<nav class="bar" aria-label="Step controls">
+  <button id="restart" class="icon" aria-label="Start over"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+  <button id="back" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="lbl">Back</span></button>
+  <div class="dots" id="dots" role="group" aria-label="Jump to step"></div>
+  <button id="next" class="primary" aria-label="Next step"><span class="lbl">Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="fs" class="icon" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+<div id="live" class="sr" aria-live="polite"></div>
+</div>
+<script>
+(async function(){
+try{await Promise.race([Promise.all(['500 28px Inter','600 24px Inter','700 28px Inter','800 54px Inter'].map(f=>document.fonts.load(f))),new Promise(r=>setTimeout(r,2500))]);}catch(e){}
+const NS='http://www.w3.org/2000/svg';
+const W=1536,H=1152,G=470,TOP=700,BOT=1030;
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function $(id){return document.getElementById(id);}
+let seed=21;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const ss=x=>{x=clamp(x,0,1);return x*x*(3-2*x);};
+const eback=x=>{x=clamp(x,0,1);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const seg=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+const lerp=(a,b,u)=>a+(b-a)*u;
+function bz(p,t){const u=1-t;return [u*u*u*p[0][0]+3*u*u*t*p[1][0]+3*u*t*t*p[2][0]+t*t*t*p[3][0],u*u*u*p[0][1]+3*u*u*t*p[1][1]+3*u*t*t*p[2][1]+t*t*t*p[3][1]];}
+function bzd(p,t){const u=1-t;return [3*u*u*(p[1][0]-p[0][0])+6*u*t*(p[2][0]-p[1][0])+3*t*t*(p[3][0]-p[2][0]),3*u*u*(p[1][1]-p[0][1])+6*u*t*(p[2][1]-p[1][1])+3*t*t*(p[3][1]-p[2][1])];}
+function nrm(p,t){const d=bzd(p,t);const L=Math.hypot(d[0],d[1])||1;return [-d[1]/L,d[0]/L];}
+function taper(p,w0,w1,n=40){const L=[],R=[];for(let i=0;i<=n;i++){const t=i/n,q=bz(p,t),m=nrm(p,t),w=(w0+(w1-w0)*Math.pow(t,0.8))/2;
+  L.push([q[0]+m[0]*w,q[1]+m[1]*w]);R.push([q[0]-m[0]*w,q[1]-m[1]*w]);}
+  let d='M'+L.map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join('L');
+  d+=`A${(w1/2).toFixed(1)},${(w1/2).toFixed(1)} 0 0 1 `+R[R.length-1][0].toFixed(1)+','+R[R.length-1][1].toFixed(1);
+  d+='L'+R.reverse().map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join('L')+'Z';return d;}
+
+// ---------- soil profile ----------
+(function(){const g=$('soilG');
+  el('rect',{x:0,y:G,width:W,height:TOP-G,fill:'url(#topsoil)'},g);
+  el('rect',{x:0,y:TOP,width:W,height:BOT-TOP,fill:'url(#subsoil)'},g);
+  let d=`M0,${TOP}`;for(let x=0;x<=W;x+=24)d+=`L${x},${TOP+Math.sin(x/37)*6+(rnd()-0.5)*6}`;d+=`L${W},${TOP+30}L0,${TOP+30}Z`;
+  el('path',{d,fill:'#8f6a45',opacity:0.35},g);
+  for(let i=0;i<520;i++){const x=rnd()*W,y=G+10+rnd()*(TOP-G-10),r=3+rnd()*11;const dark=rnd()<0.6;
+    el('ellipse',{cx:x,cy:y,rx:r,ry:r*(0.55+rnd()*0.4),transform:`rotate(${rnd()*180} ${x} ${y})`,fill:dark?`rgba(25,15,8,${0.12+rnd()*0.18})`:`rgba(150,105,70,${0.08+rnd()*0.12})`},g);}
+  for(let i=0;i<300;i++){const x=rnd()*W,y=TOP+12+rnd()*(BOT-TOP-14),r=3+rnd()*10;
+    el('ellipse',{cx:x,cy:y,rx:r,ry:r*0.7,transform:`rotate(${rnd()*180} ${x} ${y})`,fill:rnd()<0.5?`rgba(80,55,30,${0.10+rnd()*0.15})`:`rgba(220,190,150,${0.10+rnd()*0.15})`},g);}
+  el('rect',{x:0,y:G-6,width:W,height:12,fill:'#6b8f3a'},g);
+  el('rect',{x:0,y:G+4,width:W,height:4,fill:'rgba(0,0,0,0.2)'},g);
+  el('rect',{x:0,y:BOT,width:W,height:H-BOT,fill:'#fff'},g);
+})();
+// bound-P mineral grains in subsoil
+const GRAINS=[];
+(function(){const g=$('grainG');
+  const xs=[150,330,520,700,860,1040,1220,1400];
+  xs.forEach((x0,i)=>{for(let k=0;k<2;k++){const x=x0+(rnd()-0.5)*90,y=TOP+60+rnd()*(BOT-TOP-110),r=18+rnd()*12;
+    let pts=[];for(let j=0;j<8;j++){const a=j/8*Math.PI*2,rr=r*(0.8+rnd()*0.35);pts.push([x+Math.cos(a)*rr,y+Math.sin(a)*rr*0.8]);}
+    el('polygon',{points:pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' '),fill:'#bdb09a',stroke:'#7d6f5c','stroke-width':2},g);
+    GRAINS.push({x,y,r});}});
+})();
+
+// ---------- plants ----------
+const GX=[150,330,520,700,880,1060,1240,1420];
+const garlic=[];
+(function(){const g=$('garlicG');
+  GX.forEach((x,i)=>{const gg=el('g',{},g);
+    // roots (shallow fibrous)
+    for(let k=0;k<7;k++){const a=(k/6-0.5)*1.9,l=50+rnd()*40;el('path',{d:`M${x},${G+30} q${Math.sin(a)*l*0.4},${l*0.5} ${Math.sin(a)*l*0.8},${l}`,stroke:'#efe2c4','stroke-width':2.5,fill:'none'},gg);}
+    el('ellipse',{cx:x,cy:G+18,rx:20,ry:17,fill:'#f7f1e6',stroke:'#c9b79a','stroke-width':2},gg);
+    el('path',{d:`M${x-12},${G+16} q12,-10 24,0`,stroke:'#d8c9b0','stroke-width':1.5,fill:'none'},gg);
+    const top=el('g',{},gg);
+    for(let k=0;k<5;k++){const lean=(k-2)*9+(rnd()-0.5)*6,h=110+rnd()*50;
+      el('path',{d:`M${x+(k-2)*2},${G+4} Q${x+lean*0.6},${G-h*0.6} ${x+lean*1.6},${G-h}`,stroke:k%2?'#6aa84f':'#5a9a40','stroke-width':7,fill:'none','stroke-linecap':'round'},top);}
+    garlic.push({g:gg,top,x,y:G+18});});
+})();
+// buckwheat (x positions 150,520,880,1240) and cowpea (330,700,1060,1420)
+const BX=[150,520,880,1240], CX=[330,700,1060,1420];
+const BROOTS=[];
+const buck=[],cow=[];
+(function(){
+  const rootsG=$('rootsG'),g=$('coverG');
+  BX.forEach((x,i)=>{
+    const tap=[[x,G],[x+8,620],[x-10,820],[x+6,980]];
+    const lat1=[[x+2,600],[x+40,620],[x+80,660],[x+105,720]],lat2=[[x-2,700],[x-40,720],[x-70,770],[x-90,830]];
+    const rg=el('g',{},rootsG);
+    [ [lat1,8,2],[lat2,7,2],[tap,16,3] ].forEach(([p,w0,w1])=>el('path',{d:taper(p,w0,w1),fill:'#f0e1c2',stroke:'#b99a6a','stroke-width':1.6},rg));
+    const brown=el('g',{opacity:0},rootsG);
+    [ [lat1,8,2],[lat2,7,2],[tap,16,3] ].forEach(([p,w0,w1])=>el('path',{d:taper(p,w0,w1),fill:'#6e4a2b',stroke:'#4a3019','stroke-width':1.6,'stroke-dasharray':'6 5'},brown));
+    BROOTS.push({x,tap,rg,brown});
+    const sg=el('g',{},g);
+    el('path',{d:taper([[x,G+4],[x-4,420],[x+6,330],[x,250]],11,5),fill:'#b5523f',stroke:'#8a3a2c','stroke-width':1.2},sg);
+    const leaf=(lx,ly,ang,s)=>{const gg=el('g',{transform:`translate(${lx},${ly}) rotate(${ang}) scale(${s})`},sg);
+      el('path',{d:'M0,0 L22,0',stroke:'#7a8f3a','stroke-width':4},gg);
+      el('path',{d:'M22,0 C26,-26 46,-34 58,-30 C64,-28 70,-22 92,0 C70,22 64,28 58,30 C46,34 26,26 22,0Z',fill:'#6aab48',stroke:'#4a8a2d','stroke-width':2},gg);};
+    leaf(x-3,440,-160,0.8);leaf(x+2,405,-22,0.85);leaf(x-2,365,-150,0.8);leaf(x+3,320,-30,0.75);leaf(x-2,290,-140,0.7);
+    for(let k=0;k<12;k++){const a=rnd()*Math.PI*2,r=rnd()*18,fx=x+Math.cos(a)*r,fy=242+Math.sin(a)*r*1.2;
+      el('circle',{cx:fx,cy:fy,r:5,fill:'#fdf6f8',stroke:'#e2b3c1','stroke-width':1},sg);}
+    buck.push({g:sg,x});
+  });
+  CX.forEach((x,i)=>{
+    const rg=el('g',{},rootsG);
+    const p1=[[x,G],[x+4,560],[x-4,640],[x+2,720]],p2=[[x,520],[x+30,540],[x+60,580],[x+70,630]],p3=[[x,560],[x-30,580],[x-55,620],[x-60,670]];
+    [[p2,6,2],[p3,6,2],[p1,12,3]].forEach(([p,w0,w1])=>el('path',{d:taper(p,w0,w1),fill:'#f0e1c2',stroke:'#b99a6a','stroke-width':1.5},rg));
+    const nods=[];[[p2,0.4],[p2,0.75],[p3,0.5],[p1,0.45],[p1,0.7]].forEach(([p,t],k)=>{const q=bz(p,t);nods.push(el('circle',{cx:q[0]+(k%2?6:-6),cy:q[1],r:7,fill:'#e7a08a',stroke:'#8f5444','stroke-width':1.5},rg));});
+    const brown=el('g',{opacity:0},rootsG);
+    [[p2,6,2],[p3,6,2],[p1,12,3]].forEach(([p,w0,w1])=>el('path',{d:taper(p,w0,w1),fill:'#6e4a2b',stroke:'#4a3019','stroke-width':1.5,'stroke-dasharray':'6 5'},brown));
+    const sg=el('g',{},g);
+    el('path',{d:`M${x},${G+4} Q${x-6},${G-60} ${x},${G-120}`,stroke:'#4f8a2c','stroke-width':7,fill:'none','stroke-linecap':'round'},sg);
+    const tri=(lx,ly,ang)=>{const gg=el('g',{transform:`translate(${lx},${ly}) rotate(${ang})`},sg);
+      el('path',{d:'M0,0 L18,0',stroke:'#4f8a2c','stroke-width':3},gg);
+      [[-40,30],[40,30],[0,36]].forEach(([a,l])=>{const g2=el('g',{transform:`translate(18,0) rotate(${a})`},gg);
+        el('path',{d:`M0,0 C${l*0.3},-12 ${l*0.8},-11 ${l},0 C${l*0.8},11 ${l*0.3},12 0,0Z`,fill:'#5fa53e',stroke:'#3f7d25','stroke-width':1.6},g2);});};
+    tri(x,G-20,-150);tri(x,G-30,-30);tri(x,G-70,-160);tri(x,G-80,-20);tri(x,G-115,-90);
+    cow.push({g:sg,rg,brown,nods,x});
+  });
+})();
+// residue fragments (after incorporation)
+const RES=[];
+(function(){const g=$('resG');
+  for(let i=0;i<46;i++){const x=40+rnd()*(W-80),y=G+16+rnd()*120,l=14+rnd()*22,a=rnd()*180;
+    const r=el('rect',{x:x-l/2,y:y-3.5,width:l,height:7,rx:3.5,fill:rnd()<0.5?'#7d6a2e':'#5d6b2a',transform:`rotate(${a} ${x} ${y})`,opacity:0},g);
+    RES.push({x,y,el:r});}
+})();
+// microbes
+const MIC=[];
+(function(){const g=$('micG');
+  for(let i=0;i<70;i++){const r=RES[i%RES.length];const x=r.x+(rnd()-0.5)*50,y=clamp(r.y+(rnd()-0.5)*40,G+12,TOP-10);MIC.push({x,y});}
+  BROOTS.forEach(b=>{for(let k=0;k<9;k++){const q=bz(b.tap,0.25+k*0.085);MIC.push({x:q[0]+(rnd()-0.5)*26,y:q[1]});}});
+  MIC.forEach((m,i)=>{m.g=el('g',{transform:`translate(${m.x},${m.y}) scale(0)`},g);m.s=1.5;m.d=rnd()*0.8;
+    if(i%3==0){el('ellipse',{rx:6,ry:4,fill:'#2aa08b',stroke:'#0f5a4c','stroke-width':1.2,transform:`rotate(${rnd()*180})`},m.g);}
+    else if(i%3==1){el('circle',{r:4,fill:'#4bb3a0',stroke:'#0f5a4c','stroke-width':1.2},m.g);}
+    else{el('path',{d:'M-7,0 q3,-5 7,0 q4,5 7,0',stroke:'#e2c26a','stroke-width':2.4,fill:'none'},m.g);}});
+})();
+// potatoes
+const PX=[260,600,940];const pot=[];
+(function(){const g=$('potG'),hg=$('hyphG');
+  PX.forEach((x,i)=>{
+    const rg=el('g',{},g);
+    for(let k=0;k<8;k++){const a=(k/7-0.5)*2.2,l=70+rnd()*50;el('path',{d:`M${x},${G+20} q${Math.sin(a)*l*0.5},${l*0.5} ${Math.sin(a)*l},${l}`,stroke:'#efe2c4','stroke-width':2.5,fill:'none'},rg);}
+    const tubers=[];[[-60,62,1],[50,78,0.9],[-15,98,1.1],[75,46,0.7]].forEach(([dx,dy,s])=>{
+      el('path',{d:`M${x},${G+24} Q${x+dx*0.4},${G+dy*0.6} ${x+dx},${G+dy}`,stroke:'#e8d9b5','stroke-width':3,fill:'none'},rg);
+      const t=el('g',{transform:`translate(${x+dx},${G+dy}) scale(0)`},rg);
+      el('ellipse',{rx:26*s,ry:19*s,fill:'#c99a63',stroke:'#8c6436','stroke-width':2},t);
+      el('circle',{cx:-6*s,cy:-4*s,r:2,fill:'#8c6436'},t);el('circle',{cx:8*s,cy:5*s,r:2,fill:'#8c6436'},t);
+      tubers.push({g:t,x:x+dx,y:G+dy});});
+    const sg=el('g',{},g);
+    const stems=[[-30,-150],[0,-175],[32,-145]];
+    stems.forEach(([dx,h])=>el('path',{d:`M${x},${G+4} Q${x+dx*0.4},${G+h*0.5} ${x+dx},${G+h}`,stroke:'#4f8a2c','stroke-width':7,fill:'none','stroke-linecap':'round'},sg));
+    const lf=(lx,ly,a,s)=>{const gg=el('g',{transform:`translate(${lx},${ly}) rotate(${a}) scale(${s})`},sg);
+      el('path',{d:'M0,0 L60,0',stroke:'#4f8a2c','stroke-width':3},gg);
+      [[14,-1],[14,1],[30,-1],[30,1],[46,-1],[46,1]].forEach(([px,side])=>el('ellipse',{cx:px,cy:side*9,rx:10,ry:6,fill:'#5c9e3a',stroke:'#3f7d25','stroke-width':1.2},gg));
+      el('ellipse',{cx:64,cy:0,rx:12,ry:8,fill:'#5c9e3a',stroke:'#3f7d25','stroke-width':1.2},gg);};
+    [[-30,-150,-150],[-25,-110,-170],[0,-175,-95],[32,-145,-30],[28,-100,-10],[-12,-70,-160],[14,-60,-20]].forEach(([dx,dy,a])=>lf(x+dx,G+dy,a,0.9));
+    [[-34,-158],[0,-184],[36,-152]].forEach(([dx,dy])=>{for(let k=0;k<5;k++){const a=k*72*Math.PI/180;el('circle',{cx:x+dx+Math.cos(a)*5,cy:G+dy+Math.sin(a)*5,r:4.2,fill:'#f3f0fb',stroke:'#a99bd1','stroke-width':1},sg);}el('circle',{cx:x+dx,cy:G+dy,r:2.8,fill:'#f2c94c'},sg);});
+    // mycorrhizal hyphae (inoculated)
+    const hy=[];for(let k=0;k<10;k++){let px=x+(rnd()-0.5)*120,py=G+40+rnd()*80;let d=`M${px.toFixed(1)},${py.toFixed(1)}`;let a=rnd()*Math.PI*2;
+      for(let j=0;j<12;j++){a+=(rnd()-0.5)*0.8;px+=Math.cos(a)*10;py=clamp(py+Math.sin(a)*10,G+14,TOP+40);d+=`L${px.toFixed(1)},${py.toFixed(1)}`;}
+      hy.push(el('path',{d,stroke:'#f7efd9','stroke-width':2,fill:'none','stroke-linecap':'round',pathLength:1,'stroke-dasharray':'0 2'},hg));}
+    pot.push({rg,sg,tubers,hy,x,y:G+70});});
+})();
+// compost layer
+const COMP=el('g',{opacity:0},$('compG'));
+(function(){el('path',{d:`M0,${G-4} `+Array.from({length:65},(_,i)=>`L${i*24},${G-10-rnd()*10}`).join('')+` L${W},${G+6} L0,${G+6}Z`,fill:'#3d2a18'},COMP);
+  for(let i=0;i<220;i++){const x=rnd()*W,y=G-12+rnd()*16;el('circle',{cx:x,cy:y,r:1.5+rnd()*2.5,fill:rnd()<0.5?'#5a4027':'#2a1b0e'},COMP);}})();
+const ACID=el('g',{opacity:0},$('acidG'));
+BROOTS.forEach(b=>{for(let k=0;k<=6;k++){const q=bz(b.tap,0.45+k*0.09);el('circle',{cx:q[0],cy:q[1],r:34,fill:'url(#acidGlow)'},ACID);}});
+
+// ---------- P tokens (state per step) ----------
+const near=(arr,x,y)=>arr.reduce((b,o)=>Math.hypot(o.x-x,o.y-y)<Math.hypot(b.x-x,b.y-y)?o:b);
+const TOK=[];
+// group A: topsoil P used by garlic, removed at harvest
+for(let i=0;i<12;i++){const x=60+rnd()*(W-120),y=G+60+rnd()*140;const gl=near(garlic,x,y);
+  const st=[];st[0]=[[x,y]];st[1]=[[x,y],[gl.x+(rnd()-0.5)*20,G+18]];st[2]=[[gl.x,G+18],[gl.x+(rnd()-0.5)*30,G-120],null];
+  TOK.push({st,col:'#7b3fb0'});}
+// group B: bound P in subsoil, mined by buckwheat
+GRAINS.forEach((gr,gi)=>{for(let k=0;k<2;k++){const a=rnd()*Math.PI*2;const x=gr.x+Math.cos(a)*gr.r*0.9,y=gr.y+Math.sin(a)*gr.r*0.7;
+  const st=[];st[0]=[[x,y]];st[1]=st[0];st[2]=st[0];
+  if(k===1&&gi%3===0){for(let s=3;s<=7;s++)st[s]=[[x,y]];TOK.push({st,col:'#7b3fb0'});continue;}
+  const b=near(BROOTS.map(r=>({x:r.x,y:0,r})),x,0).r;
+  let tq=null,best=1e9;for(let t=0.3;t<=1;t+=0.05){const q=bz(b.tap,t);const d=Math.hypot(q[0]-x,q[1]-y);if(d<best){best=d;tq=q;}}
+  const cx=b.x+(rnd()-0.5)*60,cy=270+rnd()*170;
+  st[3]=[[x,y],tq,[b.x,G+20],[b.x,G-20],[cx,cy]];
+  const r=RES[Math.floor(rnd()*RES.length)];const rr=near(RES.filter(q=>Math.abs(q.x-b.x)<160),cx,G+60);
+  st[4]=[[cx,cy],[rr.x+(rnd()-0.5)*14,rr.y+(rnd()-0.5)*8]];
+  const m=near(MIC,rr.x,rr.y);st[5]=[st[4][1],[m.x+(rnd()-0.5)*8,m.y+(rnd()-0.5)*8]];
+  const p=near(pot,m.x,m.y);const tb=p.tubers[Math.floor(rnd()*p.tubers.length)];
+  st[6]=[st[5][1],[tb.x+(rnd()-0.5)*20,tb.y+(rnd()-0.5)*10]];st[7]=[st[6][1]];
+  TOK.push({st,col:'#7b3fb0'});}});
+// group C: compost P
+for(let i=0;i<14;i++){const x=60+rnd()*(W-120);const st=[];for(let s=0;s<7;s++)st[s]=null;st[7]=[[x,G-8],[x+(rnd()-0.5)*40,G+40+rnd()*120]];TOK.push({st,col:'#7b3fb0',comp:true});}
+TOK.forEach(t=>{t.d=rnd()*0.45;});
+function polyAt(pts,u){if(pts.length===1)return pts[0];const L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+  const s=u*L[L.length-1];let i=1;while(i<L.length-1&&L[i]<s)i++;const k=(s-L[i-1])/((L[i]-L[i-1])||1);return [lerp(pts[i-1][0],pts[i][0],k),lerp(pts[i-1][1],pts[i][1],k)];}
+function lastPt(st,s){for(let k=s;k>=0;k--){if(st[k]===undefined)continue;if(st[k]===null)return null;const p=st[k];const L=p[p.length-1];return L===null?null:L;}return null;}
+const TG=$('tokG');
+
+// ---------- labels ----------
+function rich(t,parts,fs){if(!Array.isArray(parts)){t.textContent=parts;return;}parts.forEach(s=>{const sp=el('tspan',{},t);if(typeof s==='string'){sp.textContent=s;}else{sp.textContent=s[0];sp.setAttribute('baseline-shift',s[1]=='sub'?'-25%':'40%');sp.setAttribute('font-size',fs*0.68);}});}
+function label(txt,x,y,opts={}){const g=el('g',{opacity:0},$('labelG'));
+  const fs=opts.fs||24;const t=el('text',{x:0,y:0,'font-size':fs,'font-weight':opts.fw||700,fill:opts.color||'#1f1f1f','text-anchor':'middle','dominant-baseline':'central'},g);
+  rich(t,txt,fs);const bb=t.getBBox();const px=12,py=7;
+  const r=el('rect',{x:bb.x-px,y:bb.y-py,width:bb.width+2*px,height:bb.height+2*py,rx:10,fill:opts.bg||'#fff',filter:'url(#lshadow)'},g);
+  g.insertBefore(r,t);g.setAttribute('transform',`translate(${x},${y})`);return g;}
+const SL={};
+SL.top=label('Topsoil',70,G+40,{fs:20,fw:700,color:'#3b2716'});SL.top.setAttribute('opacity',1);
+SL.sub=label('Subsoil',70,TOP+40,{fs:20,fw:700,color:'#5b4a33'});SL.sub.setAttribute('opacity',1);
+const LB={};
+LB.garlic=label('Shallow roots feed in the topsoil',1180,300,{fs:23});
+LB.harvest=label('Harvest removes P',1180,200,{fs:23,color:'#fff',bg:'#7b3fb0'});
+LB.bound=label('Bound P deep in the subsoil',1180,TOP+250,{fs:22,color:'#5b4a33'});
+LB.cowpea=label('Cowpea: fixes N, keeps fungi fed',1180,300,{fs:23,color:'#2f6b1f'});
+LB.acid=label('Acid exudates free deep P',1180,TOP+190,{fs:22,color:'#1d1d1d',bg:'#ffe14d'});
+LB.up=label('P moves up into the plant',1180,360,{fs:23,color:'#fff',bg:'#7b3fb0'});
+LB.inc=label('Residue + P land in the topsoil',1180,300,{fs:23});
+LB.roots=label('Roots decay in place, all the way down',1180,TOP+190,{fs:22});
+LB.mic=label('Microbe bloom holds the P',1180,300,{fs:23,color:'#fff',bg:'#0f8a7a'});
+LB.myco=label('Inoculated: fungi reach the P',1240,560,{fs:22,color:'#5d4a1c'});
+LB.tub=label('P feeds tuber set and starch',1240,620,{fs:22,color:'#fff',bg:'#7b3fb0'});
+LB.comp=label('Compost adds P back',1290,G+70,{fs:23,color:'#3d2a18'});
+
+// ---------- UI ----------
+const UI=$('uiG');
+el('text',{x:48,y:76,'font-size':50,'font-weight':800,fill:'#1d1d1d'},UI).textContent='Garlic → Buckwheat → Potato';
+el('text',{x:50,y:116,'font-size':26,'font-weight':500,fill:'#5b5b5b'},UI).textContent='Moving phosphorus through a living soil in one year';
+const CAPS=['Nov: plant garlic','Garlic draws P from the topsoil','May: harvest garlic, sow buckwheat + cowpea','Buckwheat pulls P up from deep soil','June: incorporate into the topsoil','Microbes bloom and hold the P','Aug: inoculated potatoes take up cycled P','Compost replaces what harvests remove'];
+const capG=CAPS.map((c,i)=>{const g=el('g',{opacity:0,transform:'translate(48,140)'},UI);
+  const t=el('text',{x:58,y:36,'font-size':28,'font-weight':700,fill:'#1d1d1d'},g);t.textContent=c;
+  const bb=t.getBBox();
+  const r=el('rect',{x:0,y:0,width:bb.x+bb.width+22,height:54,rx:12,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#lshadow)'},g);g.insertBefore(r,t);
+  el('circle',{cx:30,cy:27,r:17,fill:'#2f6b1f'},g);
+  const n=el('text',{x:30,y:28,'font-size':20,'font-weight':800,fill:'#fff','text-anchor':'middle','dominant-baseline':'central'},g);n.textContent=String(i+1);
+  return g;});
+// summary
+const SUM=el('g',{opacity:0,transform:'translate(1070,150)'},UI);
+el('rect',{x:0,y:0,width:432,height:300,rx:16,fill:'#fff',stroke:'#d8d8d8','stroke-width':2,filter:'url(#shadow)'},SUM);
+[['#7b3fb0','Harvests','remove P'],['#b5523f','Buckwheat','lifts deep P'],['#2f8f4e','Cowpea','adds N + fungi'],['#0f8a7a','Microbes','store + cycle P'],['#3d2a18','Compost','adds P back']].forEach((r,i)=>{
+  const y=38+i*55;el('circle',{cx:32,cy:y,r:13,fill:r[0]},SUM);
+  const t=el('text',{x:58,y,'font-size':25,'dominant-baseline':'central',fill:'#1d1d1d'},SUM);
+  el('tspan',{'font-weight':800},t).textContent=r[1];const b=el('tspan',{'font-weight':500,fill:'#444'},t);b.textContent='  →  '+r[2];});
+// timeline
+const TL={x0:120,x1:1416,y:1082};const MX=m=>TL.x0+(TL.x1-TL.x0)*m/12;
+(function(){const g=$('tlG');
+  [[0,6.5,'#6aa84f','Garlic'],[6.5,7.8,'#b5523f','Cover'],[7.8,9.5,'#8a6a3a','Decompose'],[9.5,12,'#c99a63','Potato']].forEach(([a,b,c,t])=>{
+    el('rect',{x:MX(a),y:TL.y-16,width:MX(b)-MX(a),height:32,fill:c,stroke:'#fff','stroke-width':2},g);
+    const tx=el('text',{x:(MX(a)+MX(b))/2,y:TL.y+7,'font-size':19,'font-weight':800,fill:'#fff','text-anchor':'middle'},g);tx.textContent=t;});
+  ['Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'].forEach((m,i)=>{const t=el('text',{x:MX(i),y:TL.y+44,'font-size':17,fill:'#666','text-anchor':'middle'},g);t.textContent=m;});
+})();
+const MARK=el('path',{d:'M-12,-14 L12,-14 L0,2Z',fill:'#1d1d1d'},$('tlG'));
+
+// ---------- render ----------
+const STEPMONTH=[0.1,3.2,6.5,7.1,7.8,8.7,10.8,11.9];
+const T=[0,2,8,15,22,28,34,41,48];   // step k animates from T[k] to T[k]+DUR[k]
+const DUR=[0,3.0,4.0,4.6,3.2,4.0,5.0,3.6];
+window.render=function(t){
+  // which step / progress
+  let k=0;for(let i=1;i<=7;i++)if(t>=T[i])k=i;
+  const u=k===0?1:clamp((t-T[k])/DUR[k],0,1);
+  const P=i=>i<k?1:(i===k?u:0); // progress of step i
+  capG.forEach((g,i)=>{const a=i<=k?ss((t-T[i])/0.5):0;const b=i<k?ss((t-T[i+1])/0.4):0;g.setAttribute('opacity',i===0&&k===0?1:clamp(a-b,0,1));});
+  // timeline marker
+  const m=k===0?STEPMONTH[0]:lerp(STEPMONTH[k-1],STEPMONTH[k],ss(u));MARK.setAttribute('transform',`translate(${MX(m)},${TL.y-18})`);
+  // garlic: small at step0, grows step1, removed step2
+  const gGrow=0.35+0.65*ss(P(1)),gOut=ss(clamp(P(2)/0.4,0,1));
+  garlic.forEach(gl=>{gl.top.setAttribute('transform',`translate(${gl.x},${G}) scale(${gGrow}) translate(${-gl.x},${-G})`);
+    gl.g.setAttribute('transform',`translate(0,${-160*gOut})`);gl.g.setAttribute('opacity',1-gOut);});
+  // cover crops
+  const cGrow=ss(clamp((P(2)-0.35)/0.65,0,1)),cDown=ss(P(4));
+  buck.forEach(b=>{const s=cGrow*(1-cDown);b.g.setAttribute('transform',`translate(${b.x},${G}) scale(${Math.max(0.001,s)}) translate(${-b.x},${-G})`);b.g.setAttribute('opacity',s>0.01?1:0);});
+  cow.forEach(c=>{const s=cGrow*(1-cDown);c.g.setAttribute('transform',`translate(${c.x},${G}) scale(${Math.max(0.001,s)}) translate(${-c.x},${-G})`);c.g.setAttribute('opacity',s>0.01?1:0);});
+  const rootIn=cGrow,brownU=ss(P(4)),rootGone=ss(P(6));
+  BROOTS.forEach(b=>{b.rg.setAttribute('opacity',rootIn*(1-brownU));b.brown.setAttribute('opacity',rootIn*brownU*(1-0.75*rootGone));
+    const sc=Math.max(0.001,rootIn);b.rg.setAttribute('transform',`translate(${b.x},${G}) scale(1,${sc}) translate(${-b.x},${-G})`);b.brown.setAttribute('transform',`translate(${b.x},${G}) scale(1,${sc}) translate(${-b.x},${-G})`);});
+  cow.forEach(c=>{c.rg.setAttribute('opacity',rootIn*(1-brownU));c.brown.setAttribute('opacity',rootIn*brownU*(1-0.75*rootGone));
+    c.nods.forEach((n,i)=>n.setAttribute('r',7*ss(clamp((P(3)-i*0.08)/0.4,0,1))));});
+  ACID.setAttribute('opacity',ss(clamp(P(3)/0.3,0,1))*(1-ss(P(4))));
+  RES.forEach((r,i)=>r.el.setAttribute('opacity',ss(clamp((P(4)-0.5)/0.4,0,1))*(1-0.75*ss(P(5)))*(1-ss(P(7)))));
+  MIC.forEach(mc=>{const v=ss(clamp((P(5)-mc.d*0.5)/0.4,0,1));mc.g.setAttribute('transform',`translate(${mc.x},${mc.y}) scale(${1.5*eback(v)*(1-0.3*ss(P(6)))})`);});
+  // potatoes
+  const pGrow=ss(clamp(P(6)/0.5,0,1)),tub=ss(clamp((P(6)-0.45)/0.55,0,1));
+  pot.forEach(p=>{p.sg.setAttribute('transform',`translate(${p.x},${G}) scale(${Math.max(0.001,pGrow)}) translate(${-p.x},${-G})`);p.sg.setAttribute('opacity',pGrow>0.01?1:0);p.rg.setAttribute('opacity',pGrow);
+    p.tubers.forEach(tb=>tb.g.setAttribute('transform',`translate(${tb.x},${tb.y}) scale(${tub})`));
+    p.hy.forEach((h,i)=>{const v=ss(clamp((P(6)-0.15-i*0.03)/0.5,0,1));h.setAttribute('stroke-dasharray',`${v} 2`);h.setAttribute('visibility',v>0.002?'visible':'hidden');});});
+  COMP.setAttribute('opacity',ss(clamp(P(7)/0.3,0,1)));
+  // tokens
+  TG.innerHTML='';
+  TOK.forEach(tk=>{
+    let pos=null,op=1;
+    const cur=tk.st[k];
+    if(k>0&&cur!==undefined){
+      if(cur===null){pos=null;}
+      else{const pts=cur.filter(p=>p!==null);const endsNull=cur[cur.length-1]===null;
+        const prev=lastPt(tk.st,k-1);
+        const v=ss(clamp((u-tk.d)/(1-tk.d),0,1));
+        if(pts.length===1){pos=pts[0];}else{pos=polyAt(pts,v);}
+        if(prev===null&&k>0)op=ss(clamp(v/0.2,0,1));
+        if(endsNull)op=1-ss(clamp((v-0.6)/0.4,0,1));
+        if(v===0&&prev===null)op=0;
+      }
+    } else {pos=lastPt(tk.st,k);}
+    if(pos&&op>0.01)el('circle',{cx:pos[0],cy:pos[1],r:8,fill:tk.col,stroke:'#fff','stroke-width':2.2,opacity:op},TG);
+  });
+  // labels
+  const L=(g,s,a=0.5,b=1.0)=>{const on=ss(clamp((t-(T[s]+DUR[s]*a))/0.5,0,1));g.setAttribute('opacity',on);};
+  const off=(g,s)=>{if(k>=s)g.setAttribute('opacity',0);};
+  L(LB.garlic,1,0.4);off(LB.garlic,2);
+  L(LB.harvest,2,0.05);off(LB.harvest,3);
+  L(LB.bound,2,0.6);off(LB.bound,4);
+  L(LB.cowpea,2,0.75);if(k===2)LB.garlic.setAttribute('opacity',0);off(LB.cowpea,3);
+  if(k===2){LB.harvest.setAttribute('opacity',clamp(1-ss((u-0.55)/0.15),0,1)*ss(clamp((t-T[2])/0.5,0,1)));LB.cowpea.setAttribute('opacity',ss(clamp((u-0.72)/0.12,0,1)));}
+  L(LB.acid,3,0.05);L(LB.up,3,0.55);off(LB.acid,4);off(LB.up,4);
+  L(LB.inc,4,0.6);L(LB.roots,4,0.75);off(LB.inc,5);off(LB.roots,5);
+  L(LB.mic,5,0.5);off(LB.mic,6);
+  L(LB.myco,6,0.4);L(LB.tub,6,0.8);off(LB.myco,7);off(LB.tub,7);
+  L(LB.comp,7,0.3);
+  SUM.setAttribute('opacity',ss(clamp((t-(T[7]+DUR[7]*0.6))/0.8,0,1)));
+};
+
+// ---------- step player ----------
+const DESC=['November: garlic is planted. The soil profile shows a dark topsoil over a lighter subsoil, with phosphorus bound to mineral particles deep down.',
+ 'Through winter and spring, garlic grows. Its shallow roots draw phosphorus from the topsoil into the bulbs.',
+ 'In May the garlic is harvested, and the phosphorus in the bulbs leaves the field. Buckwheat and cowpea are sown. Buckwheat roots reach deep into the subsoil; cowpea forms nitrogen-fixing nodules and keeps mycorrhizal fungi fed.',
+ 'Buckwheat roots release acid exudates that free bound phosphorus deep in the subsoil. The plant takes it up and moves it into its leaves and stems.',
+ 'About 40 days after sowing, in June, the buckwheat and cowpea are incorporated. The residue and its phosphorus land in the topsoil, and the roots decay in place all the way down.',
+ 'Through the summer, decomposition drives a bloom of microbes in the topsoil and along the old root channels. The phosphorus moves into microbial biomass.',
+ 'In August, whole seed potatoes are planted and inoculated with mycorrhizal fungi. The soil food web cycles phosphorus out of the microbes, the fungi reach it, and it feeds tuber set and starch.',
+ 'Compost is added to replace the phosphorus removed by the garlic and potato harvests. Summary: harvests remove P, buckwheat lifts deep P, cowpea adds nitrogen and fungi, microbes store and cycle P, and compost adds P back.'];
+const STEPS=CAPS.map((c,i)=>({s:T[i],e:T[i]+DUR[i],desc:DESC[i]}));
+let cur=0,raf=null;
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const dotsEl=$('dots');
+const dots=STEPS.map((st,i)=>{const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Step '+(i+1)+': '+CAPS[i]);b.onclick=()=>go(i,false);dotsEl.appendChild(b);return b;});
+function ui(){dots.forEach((d,i)=>{if(i===cur)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current');});
+  $('back').disabled=cur===0;$('next').disabled=cur===STEPS.length-1;
+  $('svgDesc').textContent=STEPS[cur].desc;$('live').textContent='Step '+(cur+1)+' of '+STEPS.length+'. '+STEPS[cur].desc;}
+function stop(){if(raf){cancelAnimationFrame(raf);raf=null;}}
+function go(i,animate){stop();i=clamp(i,0,STEPS.length-1);cur=i;ui();const st=STEPS[i];
+  if(!animate||reduce||st.e<=st.s){render(st.e);return;}
+  render(st.s);const t0=performance.now();
+  const tick=now=>{const t=st.s+(now-t0)/1000;if(t>=st.e){render(st.e);raf=null;return;}render(t);raf=requestAnimationFrame(tick);};
+  raf=requestAnimationFrame(tick);}
+$('next').onclick=()=>go(cur+1,true);$('back').onclick=()=>go(cur-1,false);$('restart').onclick=()=>go(0,false);
+$('fs').onclick=()=>{const d=document.documentElement;if(!document.fullscreenElement){(d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d);}else{(document.exitFullscreen||document.webkitExitFullscreen).call(document);}};
+document.addEventListener('keydown',e=>{if(e.target.tagName==='BUTTON'&&(e.key===' '||e.key==='Enter'))return;
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();if(cur<STEPS.length-1)go(cur+1,true);}
+  else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(cur-1,false);}
+  else if(e.key==='Home'){go(0,false);}});
+go(0,false);
+})();
+
+</script>
+</body></html>
