@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bridge Crossing: Moving a Trait Between Incompatible Plants</title>
+
+<meta property="og:title" content="Bridge Crossing: Moving a Trait Between Incompatible Plants">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://professoracodd.github.io/Lecture/bridge-cross.html">
+<meta property="og:image" content="https://professoracodd.github.io/Lecture/bridge-cross-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="player">
+<meta name="twitter:title" content="Bridge Crossing: Moving a Trait Between Incompatible Plants">
+<meta name="twitter:image" content="https://professoracodd.github.io/Lecture/bridge-cross-preview.png">
+<meta name="twitter:player" content="https://professoracodd.github.io/Lecture/bridge-cross.html">
+<meta name="twitter:player:width" content="800">
+<meta name="twitter:player:height" content="600">
+
+<style>
+  :root{
+    --bg:#f6f3ea; --ink:#1f2d24; --muted:#5b6b60; --green:#2f7d4f; --leaf:#4a9a5e;
+    --red:#b8392b; --redbg:#fbe1dc; --pa:#2b6cb0; --pab:#dbe8f6; --pb:#b7800f; --pbb:#f6e8c6;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#1f2d24;overflow:hidden;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink)}
+  #wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  #stage{width:960px;height:540px;background:var(--bg);position:relative;transform-origin:center center;border-radius:6px;overflow:hidden}
+  header{position:absolute;left:0;right:0;top:0;height:72px;padding:14px 28px 0}
+  .tag{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  h1{margin:2px 0 0;font-size:27px;line-height:1.15}
+  svg#art{position:absolute;left:0;top:72px;width:960px;height:378px}
+  footer{position:absolute;left:0;right:0;bottom:0;height:90px;padding:12px 28px;display:flex;align-items:center;gap:20px;border-top:1px solid #e1dccd;background:#fbf9f3}
+  #cap{flex:1;margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:19px}
+  #cap li{position:relative;padding-left:16px}
+  #cap li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;background:var(--green)}
+  nav{display:flex;align-items:center;gap:8px}
+  nav button{font:inherit;font-size:15px;border:0;border-radius:6px;padding:9px 14px;cursor:pointer;background:var(--green);color:#fff;display:flex;align-items:center;gap:6px}
+  nav button.sec{background:#e4dfd0;color:var(--ink)}
+  nav button:disabled{opacity:.35;cursor:default}
+  nav button:focus-visible{outline:3px solid var(--pb);outline-offset:2px}
+  #dots{display:flex;gap:5px;margin:0 6px}
+  #dots span{width:8px;height:8px;border-radius:50%;background:#cfc9b8}
+  #dots span.cur{background:var(--green)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  /* reveal animation */
+  .r{opacity:0}
+  .on .r{animation:rin .7s ease forwards;animation-delay:var(--d,0s)}
+  @keyframes rin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .on .grow{transform-box:fill-box;transform-origin:50% 100%;animation:rin .7s ease forwards,grow 1.4s ease forwards;animation-delay:var(--d,0s),var(--d,0s)}
+  @keyframes grow{from{transform:scaleY(.05)}to{transform:scaleY(1)}}
+  .on .pulse{animation:rin .5s ease forwards,pulse 1.6s ease-in-out infinite;animation-delay:var(--d,0s),calc(var(--d,0s) + .5s)}
+  @keyframes pulse{0%,100%{stroke-opacity:.35}50%{stroke-opacity:1}}
+  .on .sweep{animation:rin .5s ease forwards,sweep 5s ease-in-out infinite;animation-delay:var(--d,0s),var(--d,0s)}
+  @keyframes sweep{0%,100%{transform:translateX(0)}50%{transform:translateX(560px)}}
+  svg text{font-family:inherit;fill:var(--ink)}
+  .lbl{font-size:17px;font-weight:600}
+  .sm{font-size:14px;fill:var(--muted)}
+  .al{font-size:22px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+  .ctr{text-anchor:middle}
+  body.auto nav{display:none}
+  @media (prefers-reduced-motion:reduce){
+    .on .r,.on .grow,.on .pulse,.on .sweep{animation:none;opacity:1;transform:none}
+  }
+  body.rm .on .r,body.rm .on .grow,body.rm .on .pulse,body.rm .on .sweep{animation:none;opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <main id="stage" aria-roledescription="slideshow">
+    <header>
+      <div class="tag" id="tag"></div>
+      <h1 id="title"></h1>
+    </header>
+    <svg id="art" viewBox="0 0 960 378" role="img" aria-labelledby="artdesc"><desc id="artdesc"></desc><g id="scene"></g></svg>
+    <footer>
+      <ul id="cap"></ul>
+      <nav aria-label="Step controls">
+        <button class="sec" id="prev" aria-label="Previous step"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
+        <div id="dots" aria-hidden="true"></div>
+        <button id="next" aria-label="Next step">Next<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </nav>
+    </footer>
+    <div class="sr" id="live" aria-live="polite"></div>
+  </main>
+</div>
+<script>
+/* ---------- palette & helpers ---------- */
+const C={a:'#2b6cb0',ab:'#dbe8f6',b:'#6b4c9a',bb:'#e9e1f3',c:'#b7800f',cb:'#f6e8c6',t:'#c2185b',red:'#b8392b',redbg:'#fbe1dc',green:'#2f7d4f',leaf:'#4a9a5e',ink:'#1f2d24',muted:'#5b6b60'};
+const d=s=>`style="--d:${s}s"`;
+const DEFS=`<defs>
+ <linearGradient id="gAC" x1="0" x2="1"><stop offset=".5" stop-color="${C.a}"/><stop offset=".5" stop-color="${C.c}"/></linearGradient>
+</defs>`;
+
+/* m: 0 = narrow wild leaves, 1 = broad crop leaves */
+function plant(x,base,s,pot,o={}){
+  const m=o.m??.5, h=150*s, dl=o.d||0;
+  let g=`<g class="grow" ${d(dl)}>`;
+  g+=`<path d="M${x} ${base} C ${x-6*s} ${base-h*.45}, ${x+6*s} ${base-h*.7}, ${x} ${base-h}" stroke="#2d6b3f" stroke-width="${4*s+1}" fill="none"/>`;
+  for(let i=0;i<4;i++){
+    const y=base-h*(.22+.2*i), rx=(31-i*4)*s, ry=(5+10*m)*s;
+    g+=`<ellipse cx="${x-rx*.9}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(-24 ${x-rx*.9} ${y})" fill="${C.leaf}" stroke="#2d6b3f" stroke-width="1.5"/>`;
+    g+=`<ellipse cx="${x+rx*.9}" cy="${y-8*s}" rx="${rx}" ry="${ry}" transform="rotate(24 ${x+rx*.9} ${y-8*s})" fill="${C.leaf}" stroke="#2d6b3f" stroke-width="1.5"/>`;
+  }
+  g+=`<ellipse cx="${x}" cy="${base-h-6*s}" rx="${(5+5*m)*s}" ry="${16*s}" fill="${C.leaf}" stroke="#2d6b3f" stroke-width="1.5"/>`;
+  g+='</g>';
+  g+=`<path d="M${x-30} ${base} h60 l-7 38 h-46 z" fill="${pot}"/>`;
+  if(o.trait) g+=badge(x+34*Math.max(s,.8),base-h*.62,dl+.8);
+  return g;
+}
+function badge(x,y,dl){
+  return `<g class="r" ${d(dl)}><circle cx="${x}" cy="${y}" r="15" fill="${C.t}" stroke="#fff" stroke-width="3"/><path d="M${x} ${y-8} l7 2.5 v4.5 c0 5-3.5 8-7 9.5 c-3.5-1.5-7-4.5-7-9.5 v-4.5 z" fill="#fff"/></g>`;
+}
+function arrow(x1,y1,x2,y2,col=C.ink,w=3){
+  const ang=Math.atan2(y2-y1,x2-x1),L=12;
+  const ax=x2-L*Math.cos(ang-0.45),ay=y2-L*Math.sin(ang-0.45),bx=x2-L*Math.cos(ang+0.45),by=y2-L*Math.sin(ang+0.45);
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><path d="M${ax} ${ay} L${x2} ${y2} L${bx} ${by}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+const cross=(x,y)=>`<g stroke="${C.ink}" stroke-width="4" stroke-linecap="round"><line x1="${x-11}" y1="${y-11}" x2="${x+11}" y2="${y+11}"/><line x1="${x+11}" y1="${y-11}" x2="${x-11}" y2="${y+11}"/></g>`;
+const check=(x,y)=>`<circle cx="${x}" cy="${y}" r="16" fill="${C.green}"/><path d="M${x-7} ${y} l5 5 l9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+const nope=(x,y)=>`<circle cx="${x}" cy="${y}" r="16" fill="${C.red}"/><g stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="${x-6}" y1="${y-6}" x2="${x+6}" y2="${y+6}"/><line x1="${x+6}" y1="${y-6}" x2="${x-6}" y2="${y+6}"/></g>`;
+/* vertical chromosome, optional trait band */
+function chrom(x,y,src,h=150,trait=false){
+  const [col,bg]={A:[C.a,C.ab],B:[C.b,C.bb],C:[C.c,C.cb]}[src];
+  let g=`<rect x="${x}" y="${y}" width="30" height="${h}" rx="15" fill="${bg}" stroke="${col}" stroke-width="2.5"/>`;
+  if(trait) g+=`<rect x="${x-3}" y="${y+h*.32}" width="36" height="16" rx="3" fill="${C.t}"/>`;
+  return g;
+}
+/* horizontal genome bar: segs = [[fraction,color],...]; trait band at fraction tp */
+function genome(x,y,w,segs,tp,dl){
+  let g=`<g class="r" ${d(dl)}><clipPath id="cp${x}${y}"><rect x="${x}" y="${y}" width="${w}" height="26" rx="13"/></clipPath><g clip-path="url(#cp${x}${y})">`;
+  let cx=x; segs.forEach(([f,col])=>{g+=`<rect x="${cx}" y="${y}" width="${w*f+.5}" height="26" fill="${col}"/>`;cx+=w*f;});
+  g+=`</g><rect x="${x}" y="${y}" width="${w}" height="26" rx="13" fill="none" stroke="${C.ink}" stroke-width="1.5"/>`;
+  if(tp!=null) g+=`<rect x="${x+w*tp-5}" y="${y-5}" width="10" height="36" rx="3" fill="${C.t}" stroke="#fff" stroke-width="1.5"/>`;
+  return g+'</g>';
+}
+const pill=(x,y,w,txt,dl,col=C.red,bg=C.redbg)=>`<g class="r" ${d(dl)}><rect x="${x-w/2}" y="${y-20}" width="${w}" height="40" rx="8" fill="${bg}" stroke="${col}" stroke-width="2"/><text x="${x}" y="${y+6}" class="ctr" style="font-size:18px;font-weight:700;fill:${col}">${txt}</text></g>`;
+const lab=(x,y,t,dl,col,cls='lbl')=>`<text class="${cls} ctr r" x="${x}" y="${y}" style="--d:${dl}s;${col?'fill:'+col:''}">${t}</text>`;
+
+/* ---------- steps ---------- */
+const steps=[
+{tag:'Bridge Crossing', title:'Goal: move a trait from Plant A into Plant B',
+ cap:['A has the trait','B is the crop','Magenta = the trait'],
+ desc:'Plant A, a wild relative, carries a useful trait such as disease resistance. Plant B is the crop we want to give that trait to.',
+ last:3,
+ svg:()=>`
+  ${lab(200,30,'Plant A',0,C.a)}${lab(200,52,'has the trait (e.g., disease resistance)',0,C.muted,'sm')}
+  ${plant(200,290,1,C.a,{m:0,trait:true,d:.2})}
+  ${lab(740,30,'Plant B',1.2,C.b)}${lab(740,52,'the crop we want to improve',1.2,C.muted,'sm')}
+  ${plant(740,290,1.1,C.b,{m:1,d:1.4})}
+  <g class="r" ${d(2.6)}><path d="M300 150 C 420 90, 540 90, 640 150" stroke="${C.t}" stroke-width="3" stroke-dasharray="8 7" fill="none"/>${arrow(630,143,642,151,C.t,3)}<text x="470" y="92" class="ctr" style="font-size:17px;font-weight:700;fill:${C.t}">move the trait</text></g>
+  <g class="r" ${d(3)}>${badge(395,355,0).replace(/class="r"[^>]*>/,'>')}<text x="418" y="361" style="font-size:15px">= the trait</text></g>`},
+
+{tag:'The Problem', title:'A and B can’t be crossed directly',
+ cap:['A × B fails','Too distantly related'],
+ desc:'Crossing Plant A with Plant B fails: no viable seed, or sterile offspring.',
+ last:2.6,
+ svg:()=>`
+  ${lab(200,40,'Plant A',0,C.a)}${plant(200,290,1,C.a,{m:0,trait:true,d:0})}
+  ${lab(740,40,'Plant B',0,C.b)}${plant(740,290,1.1,C.b,{m:1,d:0})}
+  <g class="r" ${d(.8)}>${cross(470,200)}</g>
+  <g class="r" ${d(1.6)}><rect x="440" y="80" width="60" height="230" rx="8" fill="${C.redbg}" stroke="${C.red}" stroke-width="2.5"/><g stroke="${C.red}" stroke-width="2" opacity=".5">${[0,1,2,3,4,5].map(k=>`<line x1="442" y1="${110+k*36}" x2="498" y2="${92+k*36}"/>`).join('')}</g>${nope(470,200)}</g>
+  ${pill(470,350,360,'Incompatible: no viable seed',2.6)}`},
+
+{tag:'The Bridge', title:'Find Plant C — compatible with both',
+ cap:['C crosses with A','C crosses with B','C = bridge species'],
+ desc:'Plant C, the bridge species, can be crossed with Plant A and with Plant B, even though A and B cannot be crossed with each other.',
+ last:3.2,
+ svg:()=>`
+  <g class="r" ${d(2.6)}><path d="M150 110 C 330 0, 630 0, 810 110" stroke="${C.red}" stroke-width="3" stroke-dasharray="8 7" fill="none"/>${nope(480,28)}</g>
+  ${lab(150,128,'Plant A',0,C.a)}${plant(150,300,.75,C.a,{m:0,trait:true,d:0})}
+  ${lab(810,128,'Plant B',0,C.b)}${plant(810,300,.85,C.b,{m:1,d:0})}
+  ${lab(480,128,'Plant C (bridge)',.4,C.c)}${plant(480,300,.8,C.c,{m:.5,d:.4})}
+  <g class="r" ${d(1.3)}><line x1="215" y1="240" x2="410" y2="240" stroke="${C.green}" stroke-width="4"/>${check(312,240)}</g>
+  <g class="r" ${d(1.9)}><line x1="550" y1="240" x2="745" y2="240" stroke="${C.green}" stroke-width="4"/>${check(648,240)}</g>
+  ${lab(480,368,'compatible with both',3.2,C.green)}`},
+
+{tag:'Cross 1', title:'Cross A × C to make a bridge hybrid',
+ cap:['A × C','Bridge hybrid carries the trait'],
+ desc:'Plant A is crossed with Plant C. The bridge hybrid gets one set of chromosomes from each, including the trait from A.',
+ last:3.6,
+ svg:()=>`${DEFS}
+  ${lab(120,60,'Plant A',0,C.a)}${plant(120,290,.85,C.a,{m:0,trait:true,d:0})}
+  <g class="r" ${d(.5)}>${cross(225,200)}</g>
+  ${lab(330,60,'Plant C',.5,C.c)}${plant(330,290,.85,C.c,{m:.5,d:.5})}
+  <g class="r" ${d(1.4)}>${arrow(410,200,490,200,C.ink,4)}</g>
+  ${lab(600,40,'Bridge hybrid (A × C)',1.6,C.ink)}${plant(600,290,1.05,'url(#gAC)',{m:.25,trait:true,d:1.6})}
+  <g class="r" ${d(2.8)}>${chrom(780,80,'A',170,true)}${chrom(830,80,'C',170)}<text class="sm ctr" x="795" y="275">from A</text><text class="sm ctr" x="845" y="275">from C</text><text class="sm ctr" x="820" y="65">its chromosomes</text></g>
+  ${lab(820,320,'trait comes along',3.6,C.t)}`},
+
+{tag:'Fertility Fix', title:'The bridge hybrid is often sterile',
+ cap:['A and C chromosomes can’t pair','Double them (colchicine) → fertile'],
+ desc:'In the bridge hybrid, A and C chromosomes have no matching partner, so it is often sterile. Doubling the chromosomes with colchicine gives each one a partner and restores fertility.',
+ last:3.8,
+ svg:()=>`
+  ${lab(200,40,'Before',0)}
+  <g class="r" ${d(.2)}>${chrom(150,70,'A',170,true)}${chrom(220,70,'C',170)}</g>
+  <g class="r" ${d(.9)}><path d="M184 155 h32" stroke="${C.red}" stroke-width="3" stroke-dasharray="5 4"/>${nope(200,120)}<text class="sm ctr" x="200" y="275">no matching partner</text></g>
+  ${pill(200,320,150,'Sterile',1.4)}
+  <g class="r" ${d(2)}>${arrow(330,160,500,160,C.ink,4)}<text x="415" y="140" class="ctr" style="font-size:17px;font-weight:700">colchicine</text><text class="sm ctr" x="415" y="188">doubles chromosomes</text></g>
+  ${lab(720,40,'After',2.6)}
+  <g class="r" ${d(2.8)}>${chrom(600,70,'A',170,true)}${chrom(640,70,'A',170,true)}${chrom(770,70,'C',170)}${chrom(810,70,'C',170)}
+    <path d="M610 255 v8 h40 v-8 M780 255 v8 h40 v-8" stroke="${C.green}" stroke-width="2.5" fill="none"/><text class="sm ctr" x="720" y="285">every chromosome has a partner</text></g>
+  ${pill(720,320,150,'Fertile',3.6,C.green,'#dff0e5')}
+  <text class="sm r" x="480" y="370" style="--d:${3.8}s;text-anchor:middle">Embryo rescue may also be needed to grow seed from a wide cross</text>`},
+
+{tag:'Cross 2', title:'Cross the bridge hybrid × Plant B',
+ cap:['Trait enters B','Offspring still half “wild”'],
+ desc:'The fertile bridge hybrid is crossed with Plant B. The offspring carry the trait, but only about half of their genome is from B.',
+ last:3.8,
+ svg:()=>`${DEFS}
+  ${lab(120,40,'Bridge hybrid',0)}${plant(120,290,.95,'url(#gAC)',{m:.25,trait:true,d:0})}
+  <g class="r" ${d(.5)}>${cross(230,200)}</g>
+  ${lab(340,40,'Plant B',.5,C.b)}${plant(340,290,1,C.b,{m:1,d:.5})}
+  <g class="r" ${d(1.4)}>${arrow(425,200,505,200,C.ink,4)}</g>
+  ${lab(620,40,'Offspring',1.6)}${plant(620,290,1,C.b,{m:.6,trait:true,d:1.6})}
+  <text class="sm ctr r" x="820" y="120" ${d(2.6)}>genome (approx.)</text>
+  ${genome(730,140,180,[[.25,C.a],[.25,C.c],[.5,C.b]],.12,2.8)}
+  <g class="r" ${d(3.3)}><text x="752" y="192" class="ctr" style="font-size:13px;fill:${C.a};font-weight:700">A</text><text x="797" y="192" class="ctr" style="font-size:13px;fill:${C.c};font-weight:700">C</text><text x="865" y="192" class="ctr" style="font-size:13px;fill:${C.b};font-weight:700">B</text></g>
+  ${pill(820,250,220,'Has trait, ~50% B',3.8,C.t,'#f8dbe7')}`},
+
+{tag:'Backcrossing', title:'Backcross to Plant B, keep the trait',
+ cap:['Cross back to B each generation','Keep only plants with the trait'],
+ desc:'Each generation is crossed back to Plant B, keeping only plants with the trait. The B share of the genome rises to about 75, 87.5, then 94 percent while the trait band stays.',
+ last:4.6,
+ svg:()=>{
+  const gens=[['Offspring',.5,.6],['BC1',.75,.75],['BC2',.875,.88],['BC3',.9375,1]];
+  let s='';gens.forEach(([n,f,m],i)=>{const x=120+i*240,dl=.2+i*1.2,o=(1-f)/2;
+    s+=`${lab(x,40,n,dl)}${plant(x,230,.8,C.b,{m,trait:true,d:dl})}`;
+    s+=genome(x-80,300,160,[[f/2,C.b],[o,C.a],[o,C.c],[f/2,C.b]],f/2+o/2,dl+.3);
+    s+=`<text class="sm ctr r" x="${x}" y="354" ${d(dl+.3)}>≈ ${f*100}% B</text>`;
+    if(i<3) s+=`<g class="r" ${d(dl+.9)}>${arrow(x+70,150,x+170,150,C.ink,3)}<text x="${x+120}" y="135" class="ctr" style="font-size:15px;font-weight:700;fill:${C.b}">× B</text></g>`;});
+  return s;}},
+
+{tag:'Summary', title:'Bridge crossing in one view',
+ cap:['A × C','Bridge hybrid × B','Backcross to B'],
+ desc:'Summary flow: Plant A crossed with bridge Plant C, the bridge hybrid crossed with Plant B, then backcrossed to B, giving Plant B with the trait.',
+ last:3.2,
+ svg:()=>{
+  const box=(x,t,s,col,bg,dl)=>`<g class="r" ${d(dl)}><rect x="${x}" y="120" width="160" height="110" rx="12" fill="${bg}" stroke="${col}" stroke-width="2.5"/><text x="${x+80}" y="168" class="ctr" style="font-size:19px;font-weight:700;fill:${col}">${t}</text><text x="${x+80}" y="196" class="ctr" style="font-size:14px">${s}</text></g>`;
+  return box(20,'Plant A','has the trait',C.a,C.ab,.2)+
+   `<g class="r" ${d(.6)}>${arrow(186,175,226,175)}</g>`+
+   box(235,'× Plant C','bridge species',C.c,C.cb,.8)+
+   `<g class="r" ${d(1.2)}>${arrow(401,175,441,175)}</g>`+
+   box(450,'× Plant B','then backcross',C.b,C.bb,1.4)+
+   `<g class="r" ${d(1.8)}>${arrow(616,175,656,175)}</g>`+
+   `<g class="r" ${d(2.2)}><rect x="665" y="70" width="275" height="210" rx="14" fill="#fff" stroke="${C.green}" stroke-width="3"/><text x="802" y="104" class="ctr" style="font-size:20px;font-weight:700;fill:${C.green}">Plant B + trait</text></g>`+
+   plant(802,232,.62,C.b,{m:1,trait:true,d:2.4})+
+   `<text class="ctr r" x="480" y="345" style="--d:3.2s;font-size:20px;font-weight:700">C connects two plants that can’t cross directly.</text>`;}}
+];
+
+/* ---------- player ---------- */
+const params=new URLSearchParams(location.search);
+const AUTO=params.has('autoplay'), PAUSE=8000;
+if(AUTO) document.body.classList.add('auto');
+if(params.has('rm')) document.body.classList.add('rm');
+let i=0,timer=null;
+const $=id=>document.getElementById(id);
+const dots=$('dots'); steps.forEach(()=>dots.appendChild(document.createElement('span')));
+function show(n){
+  i=Math.max(0,Math.min(steps.length-1,n));
+  const s=steps[i];
+  $('tag').textContent=`Step ${i+1} of ${steps.length} · ${s.tag}`;
+  $('title').textContent=s.title;
+  $('cap').innerHTML=s.cap.map(c=>`<li>${c}</li>`).join('');
+  $('artdesc').textContent=s.desc;
+  const art=$('art'); art.classList.remove('on');
+  $('scene').innerHTML=s.svg();
+  void art.getBoundingClientRect(); art.classList.add('on');
+  [...dots.children].forEach((e,k)=>e.classList.toggle('cur',k===i));
+  $('prev').disabled=i===0; $('next').disabled=i===steps.length-1;
+  $('live').textContent=`Step ${i+1}: ${s.title}. ${s.desc}`;
+  if(AUTO){clearTimeout(timer);timer=setTimeout(()=>show(i===steps.length-1?0:i+1),(s.last+1)*1000+PAUSE);}
+}
+$('prev').onclick=()=>show(i-1);
+$('next').onclick=()=>show(i+1);
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+  if(e.key==='Home')show(0); if(e.key==='End')show(steps.length-1);
+});
+function fit(){const k=Math.min(innerWidth/960,innerHeight/540);$('stage').style.transform=`scale(${k})`;}
+addEventListener('resize',fit); fit();
+const st=parseInt(params.get('step'));
+show(isNaN(st)?0:st-1);
+</script>
+</body>
+</html>
